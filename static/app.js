@@ -677,7 +677,8 @@ async function ingestPairs(files) {
 /* ====================================================================== register */
 function renderRegister(fromData) {
   const el = $("#view-register"), t = L();
-  if (fromData && $("#methodForm")) { renderRegisterTop(); return; }
+  // keep the user's edits on background refreshes, but fill the form once the settings have arrived
+  if (fromData && $("#methodForm") && $("#methodForm").dataset.ready === "1") { renderRegisterTop(); return; }
   const st = (S.info && S.info.settings) || {};
   el.innerHTML = `
     <h2 class="sec">${star()}${esc(t.regTitle)}</h2>
@@ -687,7 +688,7 @@ function renderRegister(fromData) {
         <div class="panel chart" id="chartBox"></div>
         <div class="panel form" id="evalBox"></div>
       </div>
-      <form class="panel form" id="methodForm">
+      <form class="panel form" id="methodForm" data-ready="${S.info && S.info.settings ? 1 : 0}">
         <h3>${esc(t.methodTitle)}</h3>
         <div class="two">
           <div class="field"><label for="fModel">${esc(t.modelLabel)}</label><input id="fModel" class="note" style="min-height:0;direction:ltr" value="${esc(st.model || "")}"><span class="hint">${esc(t.modelHint)}</span></div>
