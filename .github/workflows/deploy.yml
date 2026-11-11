@@ -1,0 +1,59 @@
+name: Deploy to Hugging Face
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  SPACE: hsmcgn19/diwan-htr
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pytest httpx
+      - run: python -m pytest -q tests
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the token
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "::error::Add the HF_TOKEN secret first (see README, step 2)."
+            exit 1
+          fi
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Create the Space and copy its settings
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          HTR_TRAIN_FOLDER: ${{ vars.HTR_TRAIN_FOLDER }}
+          HTR_TRAIN_TEXT_FOLDER: ${{ vars.HTR_TRAIN_TEXT_FOLDER }}
+          HTR_INBOX_FOLDER: ${{ vars.HTR_INBOX_FOLDER }}
+          HTR_OUTPUT_FOLDER: ${{ vars.HTR_OUTPUT_FOLDER }}
+          HTR_MODEL: ${{ vars.HTR_MODEL }}
+        run: |
+          pip install --quiet "huggingface_hub>=0.26"
+          python .github/sync_space.py
+      - name: Push the code to the Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: git push --force "https://hsmcgn19:${HF_TOKEN}@huggingface.co/spaces/${SPACE}" HEAD:main
