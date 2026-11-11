@@ -1,0 +1,46 @@
+# Base settings for the Hugging Face Space.
+# Folder IDs, keys and passwords come from the Space's "Variables and secrets" (see README.md).
+# Model, examples, checker and rules can also be changed from the website (Register tab).
+
+storage: local
+dataset:
+  duplicate_policy: newest
+  assume_verified: true        # the training transcriptions were checked by an expert
+  val_fraction: 0.05
+  test_fraction: 0.05
+preprocess:
+  max_side: 3072
+  grayscale: true
+  autocontrast: true
+engine:
+  type: gemini
+  model: gemini-3.1-pro-preview
+  media_resolution: high
+  max_output_tokens: 8192
+few_shot:
+  k: 3
+  strategy: similar
+  prefer_verified: true
+verify:
+  consistency_samples: 1
+  critic: true
+  critic_model: gemini-3.5-flash
+  notes_language: Arabic
+  max_retries: 1
+  review_threshold: 0.85
+  auto_approve: false
+prompt:
+  system: |
+    You are an expert palaeographer of Arabic manuscripts in Maghrebi script from
+    18th- and 19th-century Algeria (sharia-court records, deeds, waqf and notarial documents).
+    Your only task is diplomatic transcription of the page image you receive.
+  conventions: |
+    - Output ONLY the transcribed Arabic text. No title, no translation, no notes, no explanation, no markdown, no quotation marks.
+    - Keep one output line per manuscript line, in reading order (top to bottom, right to left).
+    - Keep the original spelling; do not correct grammar and do not add vowels or hamzas that are not written.
+    - Maghrebi letter forms: fa has one dot below and qaf one dot above; write them as ف and ق.
+    - Put the folio number written in the margin (e.g. 33, 162) alone on the first line.
+    - Where the seal interrupts the first line, leave a run of spaces in its place; do not transcribe the seal itself.
+    - Transcribe the signature blocks at the bottom (e.g. الحمد لله, وفقه الله).
+    - Follow exactly the conventions shown in the examples. If the examples omit something, omit it too.
+  instruction: "Transcribe this page."
