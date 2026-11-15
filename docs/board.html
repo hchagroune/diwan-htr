@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Board · Dīwān al-Wathāʾiq</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#111a2d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600&amp;family=Reem+Kufi:wght@500;600;700&amp;display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/board.css">
+</head>
+<body class="ws">
+<a class="skip" href="#main">Skip to the content</a>
+
+<div class="ws-shell">
+  <aside class="ws-side">
+   <div class="ws-side-inner">
+    <a class="ws-brand" href="./" aria-label="Dīwān al-Wathāʾiq, public home page">
+      <svg aria-hidden="true" width="30" height="30" viewBox="0 0 36 36"><g transform="translate(18 18)"><rect x="-10.5" y="-10.5" width="21" height="21" fill="none" stroke="#c9a23f" stroke-width="1.8"/><rect x="-10.5" y="-10.5" width="21" height="21" fill="none" stroke="#c9a23f" stroke-width="1.8" transform="rotate(45)"/><circle r="3.2" fill="#2f9a73"/></g></svg>
+      <span class="ws-brand-names"><span class="ws-brand-latin">Dīwān</span><span class="ws-brand-arabic" lang="ar" dir="rtl">ديوان الوثائق</span></span>
+    </a>
+
+    <nav class="ws-nav" aria-label="Workspace">
+      <a href="board.html" aria-current="page">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><rect x="2" y="2.5" width="4" height="13" rx="1.2" fill="none" stroke="#e2bd55" stroke-width="1.5"/><rect x="7.5" y="2.5" width="4" height="9" rx="1.2" fill="none" stroke="#e2bd55" stroke-width="1.5"/><rect x="13" y="2.5" width="3" height="6" rx="1.2" fill="none" stroke="#e2bd55" stroke-width="1.5"/></svg>
+        <span>Board</span>
+      </a>
+      <span class="ws-nav-soon" aria-disabled="true">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><rect x="2" y="3" width="6" height="12" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 5h5M11 9h5M11 13h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Review desk</span><span class="soon">Soon</span>
+      </span>
+      <span class="ws-nav-soon" aria-disabled="true">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><rect x="2" y="3" width="14" height="4" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 7v7.5h11V7M7 10h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Archive</span><span class="soon">Soon</span>
+      </span>
+    </nav>
+
+    <div class="ws-side-foot">
+      <a href="https://hsm38.app.n8n.cloud/workflow/Yi2GEyaDfdaYeLg9" target="_blank" rel="noopener">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><path d="M10 3h5v5M15 3l-7 7M13 11v4H3V5h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Workflow in n8n
+      </a>
+      <button type="button" id="lock" class="ws-lock" hidden>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><rect x="3.5" y="8" width="11" height="7.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 8V5.8a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        Lock the board
+      </button>
+    </div>
+   </div>
+  </aside>
+
+  <main id="main" class="ws-main">
+    <header class="ws-head">
+      <div class="ws-title">
+        <div class="ws-title-row">
+          <h1>Board</h1>
+          <span id="pill" class="pill pill-locked">Locked</span>
+        </div>
+        <p id="subtitle">One card per page. Click Refresh to see where each page is now.</p>
+      </div>
+      <div class="ws-tools" id="tools" hidden>
+        <label class="find">
+          <span class="sr">Find a page</span>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="#4d546a" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#4d546a" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input id="find" type="search" placeholder="Find a page, e.g. 0188" autocomplete="off" inputmode="search">
+        </label>
+        <button type="button" id="refresh" class="ws-btn">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3.6H9.9" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Refresh</span>
+        </button>
+      </div>
+    </header>
+
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+    <section id="gate" class="gate" aria-labelledby="gate-title" hidden>
+      <svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44"><rect x="9" y="19" width="26" height="18" rx="3" fill="#f3e6c4" stroke="#8a6212" stroke-width="2"/><path d="M15 19v-5a7 7 0 0 1 14 0v5" fill="none" stroke="#8a6212" stroke-width="2"/><circle cx="22" cy="27" r="2.4" fill="#8a6212"/><path d="M22 29v3" stroke="#8a6212" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2 id="gate-title">Enter the access code</h2>
+      <p>The board shows the project's live pages. It opens only with the code you created in n8n.</p>
+      <form id="gate-form" novalidate>
+        <label for="code">Access code</label>
+        <input id="code" name="code" type="password" autocomplete="off" spellcheck="false" required>
+        <label class="check"><input id="remember" type="checkbox"> Remember on this device</label>
+        <p id="gate-error" class="gate-error" role="alert"></p>
+        <button type="submit" class="ws-btn ws-btn-wide" id="gate-go">Open the board</button>
+      </form>
+      <p class="gate-small">The code stays in this browser. It is sent only to n8n, never put in the address bar.</p>
+    </section>
+
+    <div id="board" class="cols" hidden></div>
+
+    <section id="today" class="today" aria-labelledby="today-title" hidden>
+      <h2 id="today-title">Today</h2>
+      <p class="today-sub">The latest change of each page today.</p>
+      <ul id="today-list"></ul>
+    </section>
+
+    <p class="ws-foot">The board only reads: it never moves a scan or changes a text. Each refresh runs the n8n workflow “Diwan door: board” once.</p>
+  </main>
+</div>
+
+<script src="assets/board.js" defer></script>
+</body>
+</html>
