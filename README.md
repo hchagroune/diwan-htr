@@ -16,6 +16,8 @@ such as the ANOM fonds *1 MiOM 31*. Gemini makes the first transcription. An exp
 and approves it, and every approved page becomes a new example for the next pages.
 The interface is in Arabic, with a button to switch to English.
 
+This website was created as the final project for our **Limitless Learning Agentic AI** course.
+
 The code is on GitHub (`hchagroune/diwan-htr`). The site runs on Hugging Face (`hsmcgn19/diwan-htr`).
 Every change pushed to GitHub is tested, then deployed automatically. That deploy step also creates the Space
 and copies your keys into it.
