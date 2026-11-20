@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
+#
+# Render Blueprint: runs the website for free on Render, built from this repo's Dockerfile.
+# Deploy: Render dashboard → New → Blueprint → pick this repo → fill in the values it asks for → Apply.
+# Keys and passwords are never stored here: "sync: false" makes Render ask for them once.
+
+services:
+  - type: web
+    name: diwan-htr
+    runtime: docker
+    plan: free
+    region: virginia
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    # Deploy only commits whose GitHub checks (the pytest job) passed.
+    autoDeployTrigger: checksPass
+    envVars:
+      # Required
+      - key: GEMINI_API_KEY        # from https://aistudio.google.com/apikey
+        sync: false
+      - key: APP_PASSWORD          # website password; without it the site is open to anyone
+        sync: false
+      - key: APP_SECRET            # signs logins, so they survive restarts
+        generateValue: true
+      # Google Drive (recommended on Render: its disk is wiped whenever the service sleeps)
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REFRESH_TOKEN
+        sync: false
+      - key: HTR_TRAIN_FOLDER
+        sync: false
+      - key: HTR_INBOX_FOLDER
+        sync: false
+      - key: HTR_OUTPUT_FOLDER
+        sync: false
+      # Where the app keeps its working files inside the container
+      - key: HTR_DATA
+        value: /home/user/data
