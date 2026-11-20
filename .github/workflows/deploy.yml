@@ -1,7 +1,9 @@
-name: Deploy to Hugging Face
+name: Test and deploy
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   workflow_dispatch:
 
@@ -9,6 +11,7 @@ env:
   SPACE: hsmcgn19/diwan-htr
 
 jobs:
+  # Runs on every push and pull request. Render deploys main only when this passes (render.yaml).
   test:
     runs-on: ubuntu-latest
     steps:
@@ -19,25 +22,33 @@ jobs:
       - run: pip install -r requirements.txt pytest httpx
       - run: python -m pytest -q tests
 
+  # Optional: also deploy to a Hugging Face Space, only if the HF_TOKEN secret is set.
   deploy:
     needs: test
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Check the token
+        id: token
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           if [ -z "$HF_TOKEN" ]; then
-            echo "::error::Add the HF_TOKEN secret first (see README, step 2)."
-            exit 1
+            echo "::notice::No HF_TOKEN secret, so the Hugging Face deploy is skipped. Render deploys the site (see README)."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
           fi
       - uses: actions/checkout@v4
+        if: steps.token.outputs.ok == 'true'
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
+        if: steps.token.outputs.ok == 'true'
         with:
           python-version: "3.12"
       - name: Create the Space and copy its settings
+        if: steps.token.outputs.ok == 'true'
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -54,6 +65,7 @@ jobs:
           pip install --quiet "huggingface_hub>=0.26"
           python .github/sync_space.py
       - name: Push the code to the Space
+        if: steps.token.outputs.ok == 'true'
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: git push --force "https://hsmcgn19:${HF_TOKEN}@huggingface.co/spaces/${SPACE}" HEAD:main
