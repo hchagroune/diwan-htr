@@ -22,7 +22,7 @@
 
   var COLUMNS = [
     { id: 'inbox', name: 'Inbox', sub: 'Waiting in the Drive folder', dot: '#5f6577', empty: 'No scan is waiting.' },
-    { id: 'reading', name: 'Being read', sub: 'Gemini and the checker', dot: '#22508f', empty: 'Nothing is being read.' },
+    { id: 'reading', name: 'Being read', sub: 'The AI reader and the AI checker', dot: '#22508f', empty: 'Nothing is being read.' },
     { id: 'expert', name: 'With the expert', sub: 'Review form sent by email', dot: '#c08a14', empty: 'No page is waiting for the expert.' },
     { id: 'approved', name: 'Approved', sub: 'Text saved to Results', dot: '#16684e', empty: 'No approved page yet.' },
     { id: 'attention', name: 'Needs attention', sub: 'Rejected, or no answer', dot: '#962d28', empty: 'Nothing needs attention.' }
@@ -162,7 +162,7 @@
     var li = cardShell(p.page, 'plain', stuck ? 'is-stuck' : 'is-reading');
     li.appendChild(meter('blue'));
     var sentBack = /^Sent back by the expert/.test(p.problem);
-    li.appendChild(line(sentBack ? 'Read again after the expert’s note' : 'Gemini is reading, then the checker compares', 'is-blue'));
+    li.appendChild(line(sentBack ? 'Read again after the expert’s note' : 'The AI reader is reading, then the AI checker compares', 'is-blue'));
     if (sentBack) {
       var n = p.problem.replace(/^Sent back by the expert:?\s*/, '');
       if (n) li.appendChild(note(n));
@@ -189,7 +189,7 @@
     if (p.problem) li.appendChild(note(p.problem));
     var d = toDate(p.updated);
     var tail = d ? 'Waiting ' + ago(d) : 'Waiting';
-    if (p.attempts > 1) tail += ' · ' + p.attempts + ' Gemini attempts';
+    if (p.attempts > 1) tail += ' · ' + p.attempts + ' readings';
     li.appendChild(line(tail));
     var a = scanLink(p.scanLink); if (a) li.appendChild(a);
     return li;
@@ -272,7 +272,7 @@
   }
 
   function todayText(p) {
-    if (p.stage === 'reading') return /^Sent back by the expert/.test(p.problem) ? 'sent back to Gemini' + (p.reviewer ? ' by ' + p.reviewer : '') : 'sent to Gemini';
+    if (p.stage === 'reading') return /^Sent back by the expert/.test(p.problem) ? 'sent back to the AI reader' + (p.reviewer ? ' by ' + p.reviewer : '') : 'sent to the AI reader';
     if (p.stage === 'expert') {
       var t = 'sent to the expert, ' + Math.round((p.confidence || 0) * 100) + '% sure';
       if (p.flagged > 0) t += ', ' + p.flagged + (p.flagged === 1 ? ' line flagged' : ' lines flagged');
