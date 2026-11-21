@@ -125,8 +125,6 @@ body { background: var(--night); color: var(--on-night); overflow: hidden; }
 .s-why span { font-family: var(--f-head); font-weight: 700; font-size: clamp(20px, 2.3vw, 32px); }
 
 /* 9 · close */
-.s-ask { font-family: var(--f-head); font-size: clamp(22px, 2.6vw, 36px); color: var(--on-night-2); margin: 0; display: flex; flex-direction: column; gap: 4px; }
-.s-ask span { font-family: var(--f-deed); font-style: italic; font-size: .7em; color: var(--on-night-3); }
 .s-motto { font-family: var(--f-deed); font-weight: 700; color: var(--brass); font-size: clamp(54px, 9vw, 140px); line-height: 1.4; margin: 1vh 0; }
 .s-sigs { display: flex; gap: 10vw; justify-content: center; }
 .s-sig { display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--f-deed); font-size: clamp(20px, 2.2vw, 28px); }
@@ -175,3 +173,4 @@ body { background: var(--night); color: var(--on-night); overflow: hidden; }
 @keyframes ed-draw { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
 .s-wfs .s-ar { font-size: clamp(30px, 3.8vw, 54px); max-width: none; }
 @media (prefers-reduced-motion: reduce) { .slide.on .s-wf .nd, .slide.on .s-wf .ed { animation: none !important; } }
+.s-sig-en { font-family: var(--f-deed); font-style: italic; font-size: clamp(15px, 1.5vw, 20px); color: var(--on-night-2); margin-top: -6px; }

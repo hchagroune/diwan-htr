@@ -290,3 +290,9 @@ html.embed .band, html.embed .site-head, html.embed .site-foot, html.embed .skip
 .wf-panel .wf { min-width: 760px; }
 .wf-stage { display: grid; gap: 14px; margin-top: 30px; }
 .wf-stage h3 { margin: 0; }
+
+/* creators' portraits: the photo sits inside the seal's ring once it is uploaded */
+.portrait { position: relative; display: inline-block; flex: none; }
+.portrait > svg { width: 100%; height: 100%; display: block; }
+.portrait > img { position: absolute; inset: 15%; width: 70%; height: 70%; border-radius: 50%; object-fit: cover; display: none; }
+.portrait.has-img > img { display: block; }
