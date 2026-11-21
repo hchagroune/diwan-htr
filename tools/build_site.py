@@ -8,7 +8,8 @@ and "AI checker / المدقق الآلي".
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
-SITE_URL = "https://hchagroune.github.io/diwan-htr/"
+# Public address of the static site (Render static site "diwan-alwathaiq"). The pitch QR code points here.
+SITE_URL = "https://diwan-alwathaiq.onrender.com/"
 
 # Names as they appear on the seals and signatures. Arabic spelling to be confirmed by the creators.
 CREATORS = [
@@ -463,24 +464,27 @@ def not_found():
   <div class="wrap">
     {t("هذه الصفحة غير موجودة", "This page does not exist", tag="h1")}
     {t("ربما تغيّر العنوان. عد إلى الصفحة الرئيسية أو جرّب العرض.", "The address may have changed. Go back to the welcome page or try the demo.", tag="p", cls="lead")}
-    <div class="row"><a class="btn btn-primary" href="/diwan-htr/">{t("الرئيسية", "Welcome")}</a><a class="btn btn-quiet" href="/diwan-htr/demo/">{t("جرّب", "Try it")}</a></div>
+    <div class="row"><a class="btn btn-primary" href="./">{t("الرئيسية", "Welcome")}</a><a class="btn btn-quiet" href="demo/">{t("جرّب", "Try it")}</a></div>
   </div>
 </section>"""
     p = page("404.html", "غير موجودة · ديوان الوثائق", "Not found · Dīwān al-Wathāʾiq", "Page not found.", body)
-    # 404 is served from any depth: use absolute paths
-    s = p.read_text(encoding="utf-8").replace('href="assets/', 'href="/diwan-htr/assets/').replace('src="assets/', 'src="/diwan-htr/assets/')
-    s = s.replace('data-root=""', 'data-root="/diwan-htr/"')
-    for href, _, _ in NAV:
-        if href: s = s.replace(f'href="{href}"', f'href="/diwan-htr/{href}"')
-    s = s.replace('href="creators/#', 'href="/diwan-htr/creators/#').replace('href="board.html"', 'href="/diwan-htr/board.html"')
-    s = s.replace('href=""', 'href="/diwan-htr/"')
+    # 404 is served at any depth and under two bases (GitHub Pages /diwan-htr/, Render /):
+    # a <base> chosen before anything loads makes every relative link resolve from the site root.
+    base = ("<script>document.write('<base href=\"' + (location.pathname.indexOf('/diwan-htr/') === 0 ? '/diwan-htr/' : '/') + '\">');</script>")
+    s = p.read_text(encoding="utf-8").replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + base, 1)
+    s = s.replace('<a class="skip" href="#main">', '<a class="skip" href="#main" onclick="var m=document.getElementById(\'main\');m.tabIndex=-1;m.focus();return false">')
+    s = s.replace('href="/diwan-htr/demo/"', 'href="demo/"').replace('href="/diwan-htr/"', 'href="./"').replace('href=""', 'href="./"')
     p.write_text(s, encoding="utf-8")
 
 
 if __name__ == "__main__":
     welcome(); how(); demo(); archive(); creators(); not_found()
     import pitch_page
-    pitch_page.build(DOCS, page, t, seal, CREATORS)
+    import qr
+    # the QR opens the demo straight into a real attempt on page 0188
+    target = SITE_URL + "demo/?page=0188"
+    (DOCS / "assets" / "qr-demo.svg").write_text(qr.to_svg(qr.build(target), target), encoding="utf-8")
+    pitch_page.build(DOCS, page, t, seal, CREATORS, SITE_URL)
     import service_worker
     service_worker.build(DOCS)
     print("site built in", DOCS)
