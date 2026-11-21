@@ -1,4 +1,5 @@
-"""The /pitch page: 9 full-screen slides, Arabic headline + one English line, at most 35 words each.
+"""The /pitch page: the 9 pitch slides plus 6 slides on how the real n8n workflow runs (after slide 4).
+Arabic headline + one English line; pitch slides stay under 35 words.
 
 Design: a night court of Algiers. Indigo field with a faint eight-point-star lattice, brass Amiri headlines,
 parchment for anything quoted from a deed, one ink reveal per slide. Each slide carries one picture made of
@@ -15,12 +16,13 @@ def star(r, c):
 
 
 def build(DOCS, page, t, seal, CREATORS, SITE_URL):
+    import workflow_diagrams as wd
     qr = (DOCS / "assets" / "qr-demo.svg").read_text(encoding="utf-8")
     target = SITE_URL + "demo/?page=0188"
     qr = qr.replace(f'aria-label="{target}"', 'aria-label="QR code: try the demo on page 0188"')
 
-    def slide(n, cls, body, notes_ar, notes_en):
-        return (f'<section class="slide {cls}" id="s{n}" aria-roledescription="slide" aria-label="{n} / 9" data-n="{n}">'
+    def slide(n, total, cls, body, notes_ar, notes_en):
+        return (f'<section class="slide {cls}" id="s{n}" aria-roledescription="slide" aria-label="{n} / {total}" data-n="{n}">'
                 f'<div class="slide-in">{body}</div>'
                 f'<aside class="notes" hidden>{t(notes_ar, notes_en, tag="p")}</aside></section>')
 
@@ -78,7 +80,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
               f'<path d="{arch(600, 170)}" class="a3"/><path d="{arch(400, 120)}" class="a2"/><path d="{arch(200, 70)}" class="a1"/></svg>')
 
     s = []
-    s.append(slide(1, "s-hook", f"""
+    s.append(("s-hook", f"""
       <div class="parch rise">
         <div class="crop s-crop"><img src="../assets/img/motto-line9.jpg" alt="" onload="this.parentNode.classList.add('has-img')"></div>
         <p class="s-deed" lang="ar" dir="rtl">وبالمحكمة الحنفية من بلد الجزائر المحمية بالله تعالى</p>
@@ -89,7 +91,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
         "ابدأ بالسكوت. اقرأ السطر بصوت عالٍ. هذا السطر من الوثيقة ٠١٨٨، كتبه كاتب المحكمة الحنفية في ٣ رجب ١٢٥٧ هـ. الكاتب كتب «تعلى»، ونعرضها هنا «تعالى».",
         "Open in silence, then read the line aloud. It is line 9 of deed 0188, written by the Hanafi court scribe on 3 Rajab 1257 AH. The scribe wrote تعلى; the slide shows تعالى."))
 
-    s.append(slide(2, "", h("العربية شبه غائبة عن الشبكة، وخطّها اليدوي أغيب", "Arabic is barely online; its handwriting even less.") + f"""
+    s.append(("", h("العربية شبه غائبة عن الشبكة، وخطّها اليدوي أغيب", "Arabic is barely online; its handwriting even less.") + f"""
       <div class="s-two rise">
         <figure class="s-fig">{grid}
           <figcaption lang="en" dir="ltr"><b>0.6%</b> of websites use Arabic <span class="src">W3Techs, Nov 2026</span></figcaption></figure>
@@ -102,7 +104,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
         "المربعات ألف، والمضيئة ستة: هذه حصة العربية من المواقع. OpenITI فيه ٢٫٣١ مليار كلمة عربية، منها ١٠١٬٣٣٦ فقط من خط يد منسوخ؛ النسبة ≈٠٫٠٠٤٪ حسابنا نحن، أي أقل من جزء من مربع واحد هنا.",
         "A thousand squares, six lit: Arabic’s share of websites. OpenITI holds 2.31 billion Arabic tokens; only 101,336 come from transcribed handwriting. The ≈0.004% is our arithmetic: less than a sliver of one square here."))
 
-    s.append(slide(3, "", h("تراث مصوَّر… لم يُقرأ بعد", "Filmed, catalogued, and still unread.") + f"""
+    s.append(("", h("تراث مصوَّر… لم يُقرأ بعد", "Filmed, catalogued, and still unread.") + f"""
       <figure class="s-fig wide rise">{reelsvg}
         <figcaption lang="en" dir="ltr"><b>125</b> microfilm reels of Algiers deeds, filmed by operators who knew no Arabic <span class="src">Grangaud 2026</span></figcaption></figure>
       <div class="s-big inline rise">
@@ -112,7 +114,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
         "كل دائرة بكرة. ١٢٥ بكرة في الأرشيف الوطني لما وراء البحار، بحسب Grangaud في مجلة إنسانيات ١١١. الرقم ٣٠ ألف تقدير من مركز ISAM، وهو يحتفظ بنسخ رقمية لـ ٢٣٬٧٥٦ سجلًا. لا تقل «٥ ملايين مخطوط».",
         "Each circle is a reel: 125 at ANOM, per Grangaud, Insaniyat 111. 30,000 is ISAM’s estimate; ISAM holds 23,756 in digital copies. Do not say “5 million manuscripts”."))
 
-    s.append(slide(4, "s-solution", h("قارئ آلي، مدقق آلي، وخبير يقرّر", "Every approved line becomes training data.") + f"""
+    s.append(("s-solution", h("قارئ آلي، مدقق آلي، وخبير يقرّر", "Every approved line becomes training data.") + f"""
       <div class="s-loopwrap rise">
         <ol class="s-loop" dir="rtl">{loop_nodes}</ol>
         <svg class="s-back" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true"><path d="M 300 6 C 300 54, 700 54, 700 6" fill="none" stroke="#f0b48f" stroke-width="2.5" stroke-dasharray="6 6"/><path d="M 692 16 L 700 4 L 708 16" fill="none" stroke="#f0b48f" stroke-width="2.5"/></svg>
@@ -125,7 +127,17 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
         "اضغط «جرّب الآن» لتفتح العرض هنا، أو اطلب من الحضور مسح الرمز: يفتح على هواتفهم محاولة حقيقية على الصفحة ٠١٨٨ (يحتاج الهاتف إلى إنترنت). أغلق العرض بـ Esc.",
         "Press Try it to open the demo here, or invite the room to scan: it opens a real attempt on page 0188 on their phones (phones need internet). Close the demo with Esc."))
 
-    s.append(slide(5, "", h("كل سطر يعتمده الخبير يعلّم الآلة", "Each verified line teaches the machine to read Maghrebi script.") + f"""
+    # ---- how it works: the real n8n workflow, overview then its five stages
+    s.append(("s-wfs", h("سير العمل كاملًا في n8n", "The real workflow: 40 steps in five stages, with two loops.") +
+        f'<div class="s-wf over rise">{wd.overview()}</div>',
+        "هذا سير العمل الحقيقي في n8n: ٤٠ خطوة في خمس مراحل. حلقتان: المدقق يطلب قراءة ثانية، والخبير يعيد الصفحة بملاحظة. والجدول في الأسفل يغذي لوحة الفريق على الموقع.",
+        "This is the real workflow in n8n: 40 steps in five stages. Two loops: the checker asks for a second reading, and the expert sends a page back with a note. The table at the bottom feeds the team board on the website."))
+    AR_N = "٠١٢٣٤٥"
+    for st in wd.STAGES:
+        s.append(("s-wfs", h(f'{AR_N[st["n"]]} · {st["ar"]}', st["en"]) + f'<div class="s-wf rise">{st["svg"]()}</div>',
+                  st["long_ar"], st["long_en"]))
+
+    s.append(("", h("كل سطر يعتمده الخبير يعلّم الآلة", "Each verified line teaches the machine to read Maghrebi script.") + f"""
       <div class="s-drop rise" lang="en" dir="ltr">
         <div class="bar b1"><span>21%</span></div>
         <div class="arrow" aria-hidden="true">→</div>
@@ -135,7 +147,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
         "على الخط المغربي نزل الخطأ من ٢١٫٢٤٪ إلى ٩٫٩٩٪ بعد نحو ٨٠ سطرًا، وإلى ٧٫٧٪ بعد نحو ١٦٠. ونقص وقت المراجعة ٤٢٪.",
         "On Maghrebi script, character error fell from 21.24% to 9.99% after about 80 lines, and to 7.7% after about 160. Proofreading time fell 42%."))
 
-    s.append(slide(6, "", h("التجربة الأولية: ثلاث صفحات حقيقية", "Real pilot, estimated curve.") + f"""
+    s.append(("", h("التجربة الأولية: ثلاث صفحات حقيقية", "Real pilot, estimated curve.") + f"""
       <div class="s-split rise">
         <ul class="s-facts" lang="en" dir="ltr">
           <li><b>3 pages</b><span>Algiers 2 · Annaba 1</span></li>
@@ -147,7 +159,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
         "الحقيقي: ثلاث صفحات؛ ثقة المدقق ٨٥–٨٨٪، وارتفعت إلى ٩٢٪ في الصفحة ٠١٨٨ بعد ملاحظة الخبير. المنحنى والأرقام الأخرى تقديرات من دراسات منشورة، وليست نتائجنا.",
         "Real: three pages; checker confidence 85–88%, rising to 92% on page 0188 after the expert’s note. The curve and the other figures are estimates from published studies, not our results."))
 
-    s.append(slide(7, "s-vision", h("من سجلات الجزائر إلى أرشيفات العربية في العالم", "From Algiers’ deeds to the world’s Arabic archives.") + f"""
+    s.append(("s-vision", h("من سجلات الجزائر إلى أرشيفات العربية في العالم", "From Algiers’ deeds to the world’s Arabic archives.") + f"""
       <div class="s-archwrap rise">{arches}
         <span class="al l1" lang="ar">وثائق الجزائر</span>
         <span class="al l2" lang="ar">نموذج مفتوح للخط المغربي</span>
@@ -160,21 +172,23 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
            ("منسَّق في n8n", '<svg viewBox="-30 -20 60 40"><circle cx="-18" r="6" fill="none" stroke="#e2bd55" stroke-width="2.5"/><circle cx="0" r="6" fill="none" stroke="#e2bd55" stroke-width="2.5"/><circle cx="18" r="6" fill="none" stroke="#e2bd55" stroke-width="2.5"/><path d="M-12 0H-6M6 0H12" stroke="#e2bd55" stroke-width="2.5"/></svg>'),
            ("أرشيف حقيقي، لا بيانات تجريبية", '<svg viewBox="-30 -20 60 40"><rect x="-20" y="-14" width="40" height="28" rx="2" fill="#e9dcc0"/><path d="M-14 -6H14M-14 0H14M-14 6H6" stroke="#5a4a33" stroke-width="2"/></svg>')]
     whyl = "".join(f'<li>{svg}<span lang="ar">{ar}</span></li>' for ar, svg in why)
-    s.append(slide(8, "", h("لماذا يعنيكم، د. مراد بوعاش وطلبة الذكاء الاصطناعي الوكيلي؟", "Agentic AI in practice.") +
+    s.append(("", h("لماذا يعنيكم، د. مراد بوعاش وطلبة الذكاء الاصطناعي الوكيلي؟", "Agentic AI in practice.") +
         f'<ul class="s-why rise" dir="rtl">{whyl}</ul>',
         "اربط بالدورة: وكيل يكتب، ووكيل يشكّ ويطلب إعادة، وإنسان في الحلقة يقرر. كل ذلك في n8n.",
         "Tie it to the course: one agent writes, one doubts and asks for a re-read, and a human in the loop decides. All of it in n8n."))
 
     sigs = "".join(f'<div class="s-sig">{seal(110, c["ar"].split()[0], color="#e2bd55", label=c["en"])}'
                    f'<span lang="ar">{c["ar"]}</span></div>' for c in CREATORS)
-    s.append(slide(9, "s-close", f"""
+    s.append(("s-close", f"""
       <p class="s-ask rise" lang="ar" dir="rtl">طلبنا: [ يُكتب لاحقًا ]<span lang="en" dir="ltr">Our ask: [ to be written ]</span></p>
       <p class="s-motto ink" lang="ar" dir="rtl">الجزائر المحمية بالله</p>
       <div class="s-sigs rise">{sigs}</div>""",
         "اكتبوا الطلب قبل يوم العرض: ما الذي تريدونه من الحضور تحديدًا؟ ثم اختم بالعبارة، واترك الصمت.",
         "Write the ask before the day: what exactly do you want from the room? Then close on the motto and let it rest."))
 
-    tiles = "".join(f'<li><svg viewBox="-10 -10 20 20" aria-hidden="true">{star(6, "currentColor")}</svg></li>' for _ in range(9))
+    total = len(s)
+    s = [slide(i + 1, total, *x) for i, x in enumerate(s)]
+    tiles = "".join(f'<li><svg viewBox="-10 -10 20 20" aria-hidden="true">{star(6, "currentColor")}</svg></li>' for _ in range(total))
     lattice_star = ('<rect x="-18" y="-18" width="36" height="36"/>'
                     '<rect x="-18" y="-18" width="36" height="36" transform="rotate(45)"/>')
     body = f"""
@@ -189,7 +203,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
   <div class="deck-bar">
     <a class="deck-home" href="../">{t("الرئيسية", "Welcome")}</a>
     <button type="button" class="deck-btn" id="prev" aria-label="Previous slide">‹</button>
-    <span class="deck-count" id="count" aria-live="polite" dir="ltr">1 / 9</span>
+    <span class="deck-count" id="count" aria-live="polite" dir="ltr">1 / {total}</span>
     <button type="button" class="deck-btn" id="next" aria-label="Next slide">›</button>
     <button type="button" class="deck-btn" id="notesBtn" aria-pressed="false">{t("ملاحظات (N)", "Notes (N)")}</button>
     <button type="button" class="deck-btn" id="fsBtn">{t("ملء الشاشة (F)", "Full screen (F)")}</button>
@@ -201,4 +215,4 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
   <button class="btn btn-quiet demo-close" type="button" data-close-demo>{t("إغلاق (Esc)", "Close (Esc)")}</button>
 </dialog>"""
     page("pitch/", "العرض · ديوان الوثائق", "Pitch · Dīwān al-Wathāʾiq",
-         "Nine-slide pitch for Dīwān al-Wathāʾiq.", body, scripts=("pitch.js",), current="pitch/", bare=True)
+         "Pitch and workflow presentation for Dīwān al-Wathāʾiq.", body, scripts=("pitch.js",), current="pitch/", bare=True)

@@ -223,6 +223,11 @@ def how():
         ("كل صفحة معتمدة تعلّم التالية", "Every approved page teaches the next", "الصورة ونصها المعتمد يصيران زوجًا موثقًا للتدريب.", "The scan and its approved text become a verified training pair."),
     ]
     rl = "".join(f'<div class="card">{t(a, b, tag="h3")}{t(c, d, tag="p", cls="muted")}</div>' for a, b, c, d in rules)
+    import workflow_diagrams as wd
+    AR_N = "٠١٢٣٤٥"
+    wf_stages = "".join(
+        f'<article class="wf-stage">{t(AR_N[st["n"]] + " · " + st["ar"], str(st["n"]) + " · " + st["title_en"], tag="h3")}'
+        f'<div class="wf-panel">{st["svg"]()}</div>{t(st["long_ar"], st["long_en"], tag="p")}</article>' for st in wd.STAGES)
     body = f"""
 <section class="section">
   <div class="wrap">
@@ -234,6 +239,16 @@ def how():
       <div>{t("<b>الإعادة مع ملاحظة.</b> إذا رأى الخبير خطأ، كتب ملاحظة فيقرأ القارئ الآلي الصفحة من جديد مسترشدًا بها، ثم تعود إليه. في التجربة الأولية أُعيدت الصفحة ٠١٨٨ مرتين قبل اعتمادها.",
               "<b>Send back with a note.</b> When the expert sees a mistake, they write a note; the AI reader reads the page again, guided by it, and the page returns for review. In the pilot, page 0188 went back twice before it was approved.", tag="p")}</div>
     </div>
+  </div>
+</section>
+<section class="section" aria-labelledby="wf-title">
+  <div class="wrap">
+    <h2 id="wf-title">{t("سير العمل الحقيقي في n8n", "The real workflow in n8n")}</h2>
+    {t("هذه هي الخطوات الأربعون كما تظهر في n8n، مرسومة مرحلةً مرحلة. الأسهم البرتقالية المتقطعة هي الحلقتان: قراءة ثانية بطلب المدقق، وإعادة الصفحة بملاحظة الخبير.",
+       "These are the 40 steps as they appear in n8n, drawn stage by stage. The dashed orange arrows are the two loops: a second reading when the checker asks, and a page sent back with the expert’s note.", tag="p", cls="lead")}
+    <div class="wf-panel">{wd.overview()}</div>
+    {wf_stages}
+    <p class="small muted" style="margin-top:18px">{t("رُسمت المخططات من سير العمل نفسه، ويُعرض فيها كل نموذج آلي باسم دوره فقط.", "The diagrams are drawn from the workflow itself; each AI model is shown only by its role.")}</p>
   </div>
 </section>
 <div class="dado" aria-hidden="true"></div>
