@@ -1,220 +1,110 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl" data-ui="ar" data-root="" data-title-ar="ديوان الوثائق · الجزائر المحمية بالله" data-title-en="Dīwān al-Wathāʾiq · Algiers, protected by God">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dīwān al-Wathāʼiq · the sharia-court deeds of Algiers, read line by line</title>
-<meta name="description" content="Dīwān al-Wathāʼiq turns handwritten court deeds of Algiers in Maghrebi script into searchable text. Gemini makes the first reading, a second model checks it, and an expert approves every page.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ديوان الوثائق · الجزائر المحمية بالله</title>
+<meta name="description" content="Sharia-court deeds of Algiers in Maghrebi script, read by an AI reader, checked by an AI checker and approved by an expert.">
 <meta name="theme-color" content="#111a2d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dīwān al-Wathāʼiq · ديوان الوثائق">
-<meta property="og:description" content="Every line read by Gemini. Every page approved by an expert. The sharia-court deeds of Algiers, 18th–19th century.">
-<meta property="og:url" content="https://hchagroune.github.io/diwan-htr/">
-<meta property="og:image" content="https://hchagroune.github.io/diwan-htr/assets/img/diwan-site-og-card.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600&amp;family=Noto+Naskh+Arabic:wght@400;600&amp;family=Reem+Kufi:wght@500;600;700&amp;display=swap">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/diwan.css">
+<script>(function(){try{var m=/[?&]lang=(ar|en)\b/.exec(location.search);var l=m?m[1]:(localStorage.getItem('diwan-lang')||'ar');var h=document.documentElement;h.lang=l;h.dir=l==='ar'?'rtl':'ltr';h.setAttribute('data-ui',l);}catch(e){}})();</script>
+<script src="assets/diwan.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to the content</a>
-
-<header class="top on-night">
-  <div class="wrap bar">
-    <a class="brand" href="#top" aria-label="Dīwān al-Wathāʼiq, home">
-      <svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36"><g transform="translate(18 18)"><rect x="-10.5" y="-10.5" width="21" height="21" fill="none" stroke="#c9a23f" stroke-width="1.6"/><rect x="-10.5" y="-10.5" width="21" height="21" fill="none" stroke="#c9a23f" stroke-width="1.6" transform="rotate(45)"/><circle r="3.2" fill="#2f9a73"/></g></svg>
-      <span class="brand-names"><span class="brand-latin">Dīwān al-Wathāʼiq</span><span class="brand-arabic" lang="ar" dir="rtl">ديوان الوثائق</span></span>
-    </a>
-    <nav class="nav" aria-label="Main">
-      <a href="#how">How it works</a>
-      <a href="#archive">The archive</a>
-      <a href="#experts">For experts</a>
-      <a class="nav-pill" href="mailto:chagroune.amc@gmail.com?subject=Diwan%20al-Wathaiq">Contact</a>
-    </nav>
+<a class="skip" href="#main"><span data-l="ar" lang="ar" dir="rtl">تخطَّ إلى المحتوى</span><span data-l="en" lang="en" dir="ltr">Skip to the content</span></a>
+<div class="band" aria-hidden="true"></div>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href=""><svg width="30" height="30" viewBox="-15 -15 30 30" aria-hidden="true"><rect x="-9" y="-9" width="18" height="18" fill="#16684e"/><rect x="-9" y="-9" width="18" height="18" fill="#16684e" transform="rotate(45)"/><circle r="4" fill="#e2bd55"/></svg><span data-l="ar" lang="ar" dir="rtl">ديوان الوثائق</span><span data-l="en" lang="en" dir="ltr">Dīwān al-Wathāʾiq</span></a>
+    <nav class="nav" aria-label="Sections"><a href="" aria-current="page"><span data-l="ar" lang="ar" dir="rtl">الرئيسية</span><span data-l="en" lang="en" dir="ltr">Welcome</span></a><a href="how/"><span data-l="ar" lang="ar" dir="rtl">كيف يعمل</span><span data-l="en" lang="en" dir="ltr">How it works</span></a><a href="demo/"><span data-l="ar" lang="ar" dir="rtl">جرّب</span><span data-l="en" lang="en" dir="ltr">Try it</span></a><a href="pitch/"><span data-l="ar" lang="ar" dir="rtl">العرض</span><span data-l="en" lang="en" dir="ltr">Pitch</span></a><a href="archive/"><span data-l="ar" lang="ar" dir="rtl">الأرشيف</span><span data-l="en" lang="en" dir="ltr">The archive</span></a><a href="creators/"><span data-l="ar" lang="ar" dir="rtl">من نحن</span><span data-l="en" lang="en" dir="ltr">The creators</span></a></nav>
+    <button class="lang-btn" type="button" data-lang-switch lang="en">English</button>
   </div>
-
-  <div id="top" class="wrap hero">
-    <div class="hero-text">
-      <p class="eyebrow">Sharia-court deeds of Algiers · 18th–19th century</p>
-      <h1>Every line read by Gemini. Every page approved by an expert.</h1>
-      <p class="lead">Dīwān al-Wathāʼiq turns handwritten court deeds in Maghrebi script into searchable text. Gemini makes the first reading, a second model checks it, and an expert corrects and approves each page before it is saved.</p>
-      <div class="actions">
-        <a class="btn btn-brass" href="#how">See how a page travels<svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="#111a2d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="btn btn-ghost-night" href="#experts">For experts</a>
-      </div>
-    </div>
-
-    <figure class="reading">
-      <div class="scan">
-        <img src="assets/img/diwan-site-scan-0188.jpg" width="1006" height="1600" alt="Scan of page 0188: a court deed in Maghrebi script, a seal at the top, signatures at the bottom">
-        <span class="band" aria-hidden="true"></span>
-        <span class="band-link" aria-hidden="true"></span>
-        <span class="band-tag" aria-hidden="true">LINE 9</span>
-      </div>
-      <div class="loupe">
-        <div class="loupe-label"><span>Line 9 · the manuscript</span><span>3× closer</span></div>
-        <div class="loupe-crop"><img src="assets/img/diwan-site-scan-0188.jpg" width="1006" height="1600" alt="Line 9 of the scan, enlarged"></div>
-        <div class="loupe-label green"><span>Line 9 · the approved text</span><span class="chip-expert"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#16684e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Expert</span></div>
-        <p class="loupe-text" lang="ar" dir="rtl">وبالمحكمة المنعقدة بدراجزائر المحمية بالله تعالى امام قاضيها كان الشيخ ابو القاسم الواضع طابعه</p>
-      </div>
-      <figcaption>Page 0188, a deed dated 3 Rajab 1257 (1841). Scan: Archives nationales d'outre-mer (France), 1 MiOM 31.</figcaption>
-    </figure>
-  </div>
-  <svg class="zellige" aria-hidden="true" preserveAspectRatio="none"><defs><pattern id="zl-a" width="28" height="14" patternUnits="userSpaceOnUse"><rect width="28" height="14" fill="#111a2d"/><g transform="translate(14 7)"><rect x="-4" y="-4" width="8" height="8" fill="#16684e"/><rect x="-4" y="-4" width="8" height="8" fill="#16684e" transform="rotate(45)"/><circle r="1.7" fill="#c9a23f"/></g></pattern></defs><rect width="100%" height="14" fill="url(#zl-a)"/></svg>
 </header>
-
 <main id="main">
-  <section id="how" class="wrap section" aria-labelledby="how-title">
-    <p class="eyebrow">How it works</p>
-    <h2 id="how-title">From scan to approved text, in five steps</h2>
-    <p class="lead">One page at a time. Machines do the first reading and the first check; nothing is saved until an expert approves it.</p>
-    <ol class="steps">
-      <li class="step">
-        <div class="step-head"><span class="step-num">01</span><span class="step-who">n8n</span></div>
-        <h3>Pick up</h3>
-        <p>A new scan is taken from the Inbox and set aside, so it is never read twice.</p>
-      </li>
-      <li class="step">
-        <div class="step-head"><span class="step-num">02</span><span class="step-who">Library</span></div>
-        <h3>Examples</h3>
-        <p>Pages already approved are shown to Gemini as worked examples of the team's conventions.</p>
-      </li>
-      <li class="step">
-        <div class="step-head"><span class="step-num">03</span><span class="step-who">Gemini</span></div>
-        <h3>Read and check</h3>
-        <p>Gemini transcribes the page; a second model compares it with the scan, line by line.</p>
-      </li>
-      <li class="step is-human">
-        <div class="step-head"><span class="step-num">04</span><span class="step-who">Expert</span></div>
-        <h3>Review</h3>
-        <p>The expert reads the scan beside the text, corrects it, and decides.</p>
-      </li>
-      <li class="step">
-        <div class="step-head"><span class="step-num">05</span><span class="step-who">Drive</span></div>
-        <h3>Save</h3>
-        <p>The approved text is saved as a .txt beside its scan, ready to teach the next pages.</p>
-      </li>
-    </ol>
-    <div class="loops">
-      <p class="loop"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M15.5 8A6 6 0 1 0 16 12" fill="none" stroke="#8a6212" stroke-width="1.7" stroke-linecap="round"/><path d="M16 4v4.2h-4.2" fill="none" stroke="#8a6212" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>When the checker doubts a line, Gemini reads the page once more with the checker's notes. The better version is kept.</span></p>
-      <p class="loop"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M15.5 8A6 6 0 1 0 16 12" fill="none" stroke="#16684e" stroke-width="1.7" stroke-linecap="round"/><path d="M16 4v4.2h-4.2" fill="none" stroke="#16684e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The expert can send a page back with a note. Gemini reads it again, guided by the note, and the page returns for review.</span></p>
-    </div>
-  </section>
 
-  <section id="rules" class="wrap section" aria-labelledby="rules-title">
-    <h2 id="rules-title">Three rules the system keeps</h2>
-    <div class="rules">
-      <div class="rule">
-        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32"><path d="M16 4l10 4v7c0 6.5-4.3 11.2-10 13-5.7-1.8-10-6.5-10-13V8z" fill="none" stroke="#16684e" stroke-width="1.8" stroke-linejoin="round"/><path d="M11.5 16.2l3.2 3.2 6-6.4" fill="none" stroke="#16684e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Nothing is saved without an expert</h3>
-        <p>Gemini proposes, a second model questions, a person decides. A rejected page stays out of the archive.</p>
-      </div>
-      <div class="rule">
-        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32"><path d="M7 25V7h12l6 6v12z" fill="none" stroke="#16684e" stroke-width="1.8" stroke-linejoin="round"/><path d="M19 7v6h6M11 17h10M11 21h7" fill="none" stroke="#16684e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>The deed's own spelling stays</h3>
-        <p>One output line per manuscript line, no corrected grammar, no added vowels: a diplomatic transcription.</p>
-      </div>
-      <div class="rule">
-        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32"><path d="M6 9.5C9 8 12.5 8 16 10c3.5-2 7-2 10-.5v15c-3-1.5-6.5-1.5-10 .5-3.5-2-7-2-10-.5z" fill="none" stroke="#16684e" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10v15" fill="none" stroke="#16684e" stroke-width="1.8"/></svg>
-        <h3>Every approved page teaches the next</h3>
-        <p>An approved scan and its text can join the library of examples, so Gemini learns the conventions of this fonds.</p>
-      </div>
+<section class="hero on-night" aria-labelledby="motto">
+  <div class="wrap hero-grid">
+    <div class="side">
+      <span data-l="ar" lang="ar" dir="rtl" class="label">المشكلة</span><span data-l="en" lang="en" dir="ltr" class="label">The problem</span>
+      <p data-l="ar" lang="ar" dir="rtl">صُوِّرت ملايين الصفحات من المخطوطات، لكن خطّها لم يصر بعد نصًا يُقرأ ويُبحث فيه.</p><p data-l="en" lang="en" dir="ltr">Millions of manuscript pages have been photographed. Almost none of their handwriting can yet be read or searched as text.</p>
     </div>
-  </section>
-
-  <section id="archive" class="corpus on-night" aria-labelledby="archive-title">
-    <div class="wrap corpus-inner">
-      <div class="corpus-text">
-        <p class="eyebrow">The archive</p>
-        <h2 id="archive-title" class="display">Fonds 1 MiOM 31 of the Archives nationales d'outre&#8209;mer</h2>
-        <p class="lead">Court deeds, waqf and notarial records from Algiers, written in Maghrebi script in the 18th and 19th centuries and kept on microfilm in Aix-en-Provence. Their handwriting, seals and abbreviations make ordinary text recognition fail.</p>
-        <p class="corpus-mark" lang="ar" dir="rtl">ديوان الوثائق</p>
-      </div>
-      <div class="letters">
-        <div class="letter-row">
-          <div class="letter">
-            <div class="letter-pair"><span class="glyph" lang="ar">ڢ</span><span class="arrow" aria-hidden="true">→</span><span class="glyph std" lang="ar">ف</span></div>
-            <p><strong>fa</strong> carries one dot below</p>
-          </div>
-          <div class="letter">
-            <div class="letter-pair"><span class="glyph" lang="ar">ڧ</span><span class="arrow" aria-hidden="true">→</span><span class="glyph std" lang="ar">ق</span></div>
-            <p><strong>qaf</strong> carries one dot above</p>
-          </div>
+    <div class="arch">
+      <svg viewBox="-380 -570 760 690" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+  <path d="M -360 120 L -360 0 A 395 395 0 1 1 360 0 L 360 120" fill="none" stroke="#e2bd55" stroke-width="2.5"/>
+  <path d="M -344 120 L -344 0 A 379 379 0 1 1 344 0 L 344 120 Z" fill="#18233a" stroke="#e2bd55" stroke-width="1"/>
+  <path d="M -326 120 L -326 0 A 361 361 0 1 1 326 0 L 326 120" fill="none" stroke="#2a3651" stroke-width="1" stroke-dasharray="3 6"/>
+</svg>
+      <div class="arch-inner">
+        <div class="crop">
+          <img src="assets/img/motto-line9.jpg" alt="" onload="this.parentNode.classList.add('has-img')">
+          <span data-l="ar" lang="ar" dir="rtl" class="ph">[ مقتطع السطر ٩ من الوثيقة ٠١٨٨ بخط الكاتب ]</span><span data-l="en" lang="en" dir="ltr" class="ph">[ Line 9 of deed 0188 in the scribe’s hand ]</span>
         </div>
-        <p>Maghrebi letter forms, as Gemini is told to read them. The transcription writes them as ف and ق.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="experts" class="wrap section experts" aria-labelledby="experts-title">
-    <div class="experts-text">
-      <p class="eyebrow">For experts</p>
-      <h2 id="experts-title">Review a page wherever you are</h2>
-      <p class="lead">Each page reaches the expert with Gemini's text, the checker's notes and a link to the scan. The expert corrects it and makes one of three decisions.</p>
-      <ul class="points">
-        <li><span class="dot dot-brass" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 4.5h12M1 9.5h12" stroke="#8a6212" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><strong>Line against line.</strong> <span class="muted">The text keeps one line per manuscript line, numbered like the scan.</span></span></li>
-        <li><span class="dot dot-red" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2.5v5.5" stroke="#962d28" stroke-width="1.8" stroke-linecap="round"/><circle cx="7" cy="11" r="1.1" fill="#962d28"/></svg></span><span><strong>Doubts in plain sight.</strong> <span class="muted">Lines the checker questioned are marked, with its note in Arabic.</span></span></li>
-        <li><span class="dot dot-green" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2.5 7.2l2.8 2.8 6-6.5" fill="none" stroke="#16684e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Three clear decisions.</strong> <span class="muted">Approve, send back to Gemini with a note, or reject.</span></span></li>
-      </ul>
-      <p class="now"><strong>Today</strong> the review happens in a form sent by email. <strong>Next</strong>, a review desk will show the scan beside the text, one line at a time on a phone, as in the preview.</p>
-      <div class="actions">
-        <a class="btn btn-green" href="mailto:chagroune.amc@gmail.com?subject=Diwan%20al-Wathaiq%3A%20reviewer%20access">Ask for reviewer access</a>
-      </div>
-    </div>
-
-    <figure class="phone-figure">
-      <div class="phone-frame" aria-hidden="true">
-        <div class="phone">
-          <div class="ph-top">
-            <span class="ph-icon"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M12.5 4l-6 6 6 6" fill="none" stroke="#f3ede1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="ph-title"><b>Page 0188</b><span>Line 9 of 17 · 3 lines flagged</span></span>
-            <span class="ph-score">72%</span>
-            <span class="ph-icon"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="4.5" r="1.6" fill="#f3ede1"/><circle cx="10" cy="10" r="1.6" fill="#f3ede1"/><circle cx="10" cy="15.5" r="1.6" fill="#f3ede1"/></svg></span>
-          </div>
-          <div class="ph-scan">
-            <img src="assets/img/diwan-site-scan-0188.jpg" width="1006" height="1600" alt="">
-            <span class="ph-band"></span>
-            <span class="ph-tag">Scan · line 9</span>
-            <span class="ph-zoom"><span><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span><span><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8h10M8 3v10" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></span>
-          </div>
-          <div class="ph-body">
-            <div class="ph-label"><span>Line 9 · correct it here</span><span class="flag">Flagged</span></div>
-            <div class="ph-line" lang="ar" dir="rtl">وبالمحكمة المنعقدة بدراجزائر المحمية بالله تعالى امام قاضيها كان الشيخ ابو القاسم الواضع طابعه</div>
-            <div class="ph-note">
-              <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7.5" fill="none" stroke="#962d28" stroke-width="1.5"/><path d="M9 5v5" stroke="#962d28" stroke-width="1.7" stroke-linecap="round"/><circle cx="9" cy="12.8" r="1" fill="#962d28"/></svg>
-              <span class="ph-note-text"><b>Checker's note</b><span lang="ar" dir="rtl">تحقق من اسم القاضي في وسط السطر</span></span>
-            </div>
-            <div class="ph-nav">
-              <span><svg width="16" height="16" viewBox="0 0 16 16"><path d="M10 3.5L5.5 8l4.5 4.5" fill="none" stroke="#17203a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Line 8</span>
-              <span class="ticks"><i></i><i></i><i></i><i class="flag"></i><i></i><i></i><i></i><i></i><i class="here"></i><i class="todo"></i><i class="flag"></i><i class="todo"></i><i class="todo"></i><i class="todo"></i><i class="todo"></i><i class="todo"></i><i class="todo"></i></span>
-              <span>Line 10<svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l4.5 4.5L6 12.5" fill="none" stroke="#17203a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-          </div>
-          <div class="ph-actions">
-            <span class="ph-approve"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M3.5 9.4l3.4 3.4 7.6-8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Approve the page</span>
-            <span class="ph-row"><span class="ph-back">Send back with a note</span><span class="ph-reject">Reject</span></span>
-          </div>
+        <h1 id="motto" class="motto" lang="ar" dir="rtl"><span class="motto-ink">الجزائر المحمية بالله</span></h1>
+        <p class="motto-en" lang="en" dir="ltr">Algiers, protected by God</p>
+        <p data-l="ar" lang="ar" dir="rtl" class="motto-src">السطر ٩ من وثيقة للمحكمة الحنفية بالجزائر، ٣ رجب ١٢٥٧ هـ (١٨٤١ م)</p><p data-l="en" lang="en" dir="ltr" class="motto-src">Line 9 of a deed of the Hanafi court of Algiers, 3 Rajab 1257 AH (1841)</p>
+        <div class="row" style="justify-content:center;margin-top:6px">
+          <a class="btn btn-primary" href="demo/"><span data-l="ar" lang="ar" dir="rtl">جرّب بنفسك</span><span data-l="en" lang="en" dir="ltr">Try it yourself</span></a>
+          <a class="btn btn-line" href="pitch/"><span data-l="ar" lang="ar" dir="rtl">شاهد العرض</span><span data-l="en" lang="en" dir="ltr">Watch the pitch</span></a>
         </div>
       </div>
-      <figcaption>Preview of the coming review desk on a phone. The score and the note are examples.</figcaption>
-    </figure>
-  </section>
+    </div>
+    <div class="side">
+      <span data-l="ar" lang="ar" dir="rtl" class="label">الفكرة</span><span data-l="en" lang="en" dir="ltr" class="label">The idea</span>
+      <p data-l="ar" lang="ar" dir="rtl">قارئ آلي يكتب المسودة، ومدقق آلي يعلّم الأسطر المشكوك فيها، وخبير يعتمد كل صفحة؛ وكل سطر يعتمده يصير بيانات تدريب.</p><p data-l="en" lang="en" dir="ltr">An AI reader drafts, an AI checker flags doubtful lines, and an expert approves every page. Each approved line becomes training data.</p>
+    </div>
+  </div>
+  <div class="dado" aria-hidden="true" style="margin-top:28px"></div>
+</section>
+
+<section class="section" aria-labelledby="about-motto">
+  <div class="wrap">
+    <h2 id="about-motto"><span data-l="ar" lang="ar" dir="rtl">عن العبارة</span><span data-l="en" lang="en" dir="ltr">About the motto</span></h2>
+    <div class="caption-box" style="color:var(--ink-2);border-color:var(--terra)">
+      <p data-l="ar" lang="ar" dir="rtl">«الجزائر المحمية بالله» كما كتبها كاتب المحكمة الحنفية في السطر التاسع من وثيقة مؤرخة في ٣ رجب ١٢٥٧ هـ (١٨٤١ م): «وبالمحكمة الحنفية من بلد الجزائر المحمية بالله تعالى». وهي من ألقاب مدينة الجزائر في العهد العثماني، ومنها أيضًا «المحروسة»، وهو لقب يشير إلى حماية إلهية وبشرية معًا.</p><p data-l="en" lang="en" dir="ltr">“Algiers, protected by God”, as the Hanafi court scribe wrote it on line 9 of a deed dated 3 Rajab 1257 AH (1841): “…and at the Hanafi court of the city of Algiers, protected by God Most High…”. It is one of the city’s Ottoman-era epithets, alongside al-Maḥrūsa, “the well-guarded”, a name that alludes to both divine and human protection.</p>
+      <p class="small" style="margin:0"><span data-l="ar" lang="ar" dir="rtl">المصادر:</span><span data-l="en" lang="en" dir="ltr">Sources:</span>
+        <a href="https://cguaa.journals.ekb.eg/article_31924.html"><span data-l="ar" lang="ar" dir="rtl">زكية راجعي، مجلة الاتحاد العام للآثاريين العرب</span><span data-l="en" lang="en" dir="ltr">Zakia Rajai, Journal of the General Union of Arab Archaeologists (in Arabic)</span></a> ·
+        <a href="https://shs.hal.science/halshs-01309755"><span data-l="ar" lang="ar" dir="rtl">التحصينات العثمانية لمدينة الجزائر (١٥١٦–١٨٣٠)</span><span data-l="en" lang="en" dir="ltr">Les fortifications ottomanes d’Alger (1516–1830)</span></a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="explore">
+  <div class="wrap">
+    <h2 id="explore" class="visually-hidden"><span data-l="ar" lang="ar" dir="rtl">اكتشف</span><span data-l="en" lang="en" dir="ltr">Explore</span></h2>
+    <div class="grid-3">
+      <a class="card" href="how/" style="text-decoration:none;color:inherit">
+        <h3 data-l="ar" lang="ar" dir="rtl">كيف يعمل</h3><h3 data-l="en" lang="en" dir="ltr">How it works</h3>
+        <p data-l="ar" lang="ar" dir="rtl" class="muted">خمس مراحل من الصورة إلى النص المعتمد، وطريق لإعادة الصفحة مع ملاحظة.</p><p data-l="en" lang="en" dir="ltr" class="muted">Five steps from scan to approved text, and a way to send a page back with a note.</p>
+      </a>
+      <a class="card" href="archive/" style="text-decoration:none;color:inherit">
+        <h3 data-l="ar" lang="ar" dir="rtl">الأرشيف</h3><h3 data-l="en" lang="en" dir="ltr">The archive</h3>
+        <p data-l="ar" lang="ar" dir="rtl" class="muted">سجلات محاكم الجزائر الشرعية، ولماذا يصعب على الآلة قراءتها.</p><p data-l="en" lang="en" dir="ltr" class="muted">The sharia-court registers of Algiers, and why machines struggle to read them.</p>
+      </a>
+      <a class="card" href="creators/" style="text-decoration:none;color:inherit">
+        <h3 data-l="ar" lang="ar" dir="rtl">من نحن</h3><h3 data-l="en" lang="en" dir="ltr">The creators</h3>
+        <p data-l="ar" lang="ar" dir="rtl" class="muted">شاهدا هذا الديوان، كما يشهد العدلان على كل وثيقة.</p><p data-l="en" lang="en" dir="ltr" class="muted">The project’s two witnesses, as two notaries witness every deed.</p>
+      </a>
+    </div>
+  </div>
+</section>
 </main>
-
-<footer class="foot">
-  <svg class="zellige" aria-hidden="true" preserveAspectRatio="none"><defs><pattern id="zl-b" width="28" height="14" patternUnits="userSpaceOnUse"><rect width="28" height="14" fill="#111a2d"/><g transform="translate(14 7)"><rect x="-4" y="-4" width="8" height="8" fill="#16684e"/><rect x="-4" y="-4" width="8" height="8" fill="#16684e" transform="rotate(45)"/><circle r="1.7" fill="#c9a23f"/></g></pattern></defs><rect width="100%" height="14" fill="url(#zl-b)"/></svg>
-  <div class="wrap foot-inner">
-    <div class="foot-about">
-      <span class="foot-name">Dīwān al-Wathāʼiq · <span lang="ar" dir="rtl">ديوان الوثائق</span></span>
-      <p>Scans: Archives nationales d'outre-mer (France), fonds 1 MiOM 31. Transcriptions are diplomatic and approved by an expert.</p>
+<footer class="site-foot">
+  <div class="dado" aria-hidden="true"></div>
+  <div class="wrap foot-sign">
+    <p style="margin:0"><span data-l="ar" lang="ar" dir="rtl">شهد على هذا الديوان شاهداه</span><span data-l="en" lang="en" dir="ltr">Witnessed by its two creators</span></p>
+    <div class="signatures"><a class="sig" href="creators/#seal-1"><svg width="40" height="40" viewBox="-66 -66 132 132" aria-hidden="true"><circle r="62" fill="none" stroke="#e2bd55" stroke-width="2.6"/><circle r="54" fill="#e2bd55" fill-opacity="0.07" stroke="#e2bd55" stroke-width="1"/><text x="0" y="6" text-anchor="middle" font-family="Amiri, serif" font-size="21" font-weight="700" fill="#e2bd55">حسام</text></svg><span class="name"><span data-l="ar" lang="ar" dir="rtl">حسام الدين شقرون</span><span data-l="en" lang="en" dir="ltr">Houssam Eddine Chagroune</span></span></a><a class="sig" href="creators/#seal-2"><svg width="40" height="40" viewBox="-66 -66 132 132" aria-hidden="true"><circle r="62" fill="none" stroke="#e2bd55" stroke-width="2.6"/><circle r="54" fill="#e2bd55" fill-opacity="0.07" stroke="#e2bd55" stroke-width="1"/><text x="0" y="6" text-anchor="middle" font-family="Amiri, serif" font-size="21" font-weight="700" fill="#e2bd55">ياسين</text></svg><span class="name"><span data-l="ar" lang="ar" dir="rtl">ياسين دادي عدون</span><span data-l="en" lang="en" dir="ltr">Yacine Daddi Addoun</span></span></a></div>
+  </div>
+  <div class="wrap foot-meta">
+    <div>
+      <p style="margin:0 0 4px"><span data-l="ar" lang="ar" dir="rtl">الصور: الأرشيف الوطني لما وراء البحار (ANOM)، إكس أون بروفانس. النصوص المعتمدة نسخ حرفي راجعه خبير.</span><span data-l="en" lang="en" dir="ltr">Scans: Archives nationales d’outre-mer (ANOM), Aix-en-Provence. Approved texts are diplomatic transcriptions checked by an expert.</span></p>
+      <p style="margin:0"><span data-l="ar" lang="ar" dir="rtl">مشروع التخرج لدورة Limitless Learning في الذكاء الاصطناعي الوكيلي.</span><span data-l="en" lang="en" dir="ltr">Final project for the Limitless Learning Agentic AI course.</span></p>
     </div>
-    <div class="foot-cols">
-      <div class="foot-col"><b>Project</b><a href="#how">How it works</a><a href="#archive">The archive</a><a href="#experts">For experts</a></div>
-      <div class="foot-col"><b>Contact</b><a href="mailto:chagroune.amc@gmail.com?subject=Diwan%20al-Wathaiq">chagroune.amc@gmail.com</a><a href="https://github.com/hchagroune/diwan-htr">Source on GitHub</a><span>Built on n8n, Gemini and Google Drive</span></div>
+    <div class="row" style="gap:16px">
+      <a href="https://github.com/hchagroune/diwan-htr">GitHub</a>
+      <a href="mailto:chagroune.amc@gmail.com">chagroune.amc@gmail.com</a>
+      <a class="board" href="board.html"><span data-l="ar" lang="ar" dir="rtl">لوحة الفريق</span><span data-l="en" lang="en" dir="ltr">Team board</span></a>
     </div>
   </div>
 </footer>
