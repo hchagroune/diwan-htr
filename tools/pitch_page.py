@@ -5,10 +5,10 @@ Never name an AI model or vendor here.
 """
 
 
-def build(DOCS, page, t, seal, CREATORS):
+def build(DOCS, page, t, seal, CREATORS, SITE_URL):
     qr = (DOCS / "assets" / "qr-demo.svg").read_text(encoding="utf-8")
-    qr = qr.replace('aria-label="QR code: https://hchagroune.github.io/diwan-htr/demo/"',
-                    'aria-label="QR code to the demo: hchagroune.github.io/diwan-htr/demo"')
+    short = SITE_URL.split("//", 1)[1] + "demo"
+    qr = qr.replace(f'aria-label="{SITE_URL}demo/"', f'aria-label="QR code to the demo: {short}"')
 
     def slide(n, cls, body, notes_ar, notes_en):
         return (f'<section class="slide {cls}" id="s{n}" aria-roledescription="slide" aria-label="{n} / 9" data-n="{n}">'
