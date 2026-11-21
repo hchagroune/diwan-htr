@@ -15,7 +15,7 @@ def star(r, c):
     return STAR.format(r=r, d=2 * r, c=c)
 
 
-def build(DOCS, page, t, seal, CREATORS, SITE_URL):
+def build(DOCS, page, t, seal, CREATORS, SITE_URL, portrait, img_slot):
     import workflow_diagrams as wd
     qr = (DOCS / "assets" / "qr-demo.svg").read_text(encoding="utf-8")
     target = SITE_URL + "demo/?page=0188"
@@ -82,7 +82,7 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
     s = []
     s.append(("s-hook", f"""
       <div class="parch rise">
-        <div class="crop s-crop"><img src="../assets/img/motto-line9.jpg" alt="" onload="this.parentNode.classList.add('has-img')"></div>
+        <div class="crop s-crop">{img_slot("../assets/img/motto-line9")}</div>
         <p class="s-deed" lang="ar" dir="rtl">وبالمحكمة الحنفية من بلد الجزائر المحمية بالله تعالى</p>
         <p class="parch-src" lang="en" dir="ltr">Line 9 · deed 0188 · Hanafi court of Algiers · 1841</p>
       </div>
@@ -177,14 +177,13 @@ def build(DOCS, page, t, seal, CREATORS, SITE_URL):
         "اربط بالدورة: وكيل يكتب، ووكيل يشكّ ويطلب إعادة، وإنسان في الحلقة يقرر. كل ذلك في n8n.",
         "Tie it to the course: one agent writes, one doubts and asks for a re-read, and a human in the loop decides. All of it in n8n."))
 
-    sigs = "".join(f'<div class="s-sig">{seal(110, c["ar"].split()[0], color="#e2bd55", label=c["en"])}'
-                   f'<span lang="ar">{c["ar"]}</span></div>' for c in CREATORS)
+    sigs = "".join(f'<div class="s-sig">{portrait(c, 140, "../", color="#e2bd55")}'
+                   f'<span lang="ar">{c["ar"]}</span><span class="s-sig-en" lang="en" dir="ltr">{c["en"]}</span></div>' for c in CREATORS)
     s.append(("s-close", f"""
-      <p class="s-ask rise" lang="ar" dir="rtl">طلبنا: [ يُكتب لاحقًا ]<span lang="en" dir="ltr">Our ask: [ to be written ]</span></p>
       <p class="s-motto ink" lang="ar" dir="rtl">الجزائر المحمية بالله</p>
       <div class="s-sigs rise">{sigs}</div>""",
-        "اكتبوا الطلب قبل يوم العرض: ما الذي تريدونه من الحضور تحديدًا؟ ثم اختم بالعبارة، واترك الصمت.",
-        "Write the ask before the day: what exactly do you want from the room? Then close on the motto and let it rest."))
+        "اختم بالعبارة، ثم قدّم الشاهدين، واترك الصمت.",
+        "Close on the motto, introduce the two witnesses, and let it rest."))
 
     total = len(s)
     s = [slide(i + 1, total, *x) for i, x in enumerate(s)]

@@ -47,7 +47,10 @@
     $("bench").hidden = false; $("final").hidden = true; $("decide").hidden = true; $("noteBox").hidden = true; $("meter").hidden = true;
     $("note").value = "";
     var img = $("scanImg"); $("scan").classList.remove("has-img");
-    img.src = "../assets/img/scan-" + p.id + ".jpg";
+    var base = "../assets/img/scan-" + p.id;
+    img.setAttribute("data-alt", base + ".png," + base + ".webp," + base + ".jpeg");
+    img.onerror = function () { window.diwanImg && window.diwanImg(img); };
+    img.src = base + ".jpg";
     img.alt = L("صورة الصفحة ", "Scan of page ") + p.id;
     drawTitle();
     read(L("القارئ الآلي يقرأ الصفحة سطرًا بسطر…", "The AI reader is reading the page line by line…"));
