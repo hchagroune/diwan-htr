@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-ui="ar" data-root="../" data-title-ar="جرّب · ديوان الوثائق" data-title-en="Try it · Dīwān al-Wathāʾiq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>جرّب · ديوان الوثائق</title>
+<meta name="description" content="Play the expert on real pilot pages: approve, correct or send back with a note.">
+<meta name="theme-color" content="#111a2d">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/diwan.css">
+<script>(function(){try{var m=/[?&]lang=(ar|en)\b/.exec(location.search);var l=m?m[1]:(localStorage.getItem('diwan-lang')||'ar');var h=document.documentElement;h.lang=l;h.dir=l==='ar'?'rtl':'ltr';h.setAttribute('data-ui',l);}catch(e){}})();</script>
+<script src="../assets/diwan.js" defer></script><script src="../assets/demo-data.js" defer></script><script src="../assets/demo.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="ar" lang="ar" dir="rtl">تخطَّ إلى المحتوى</span><span data-l="en" lang="en" dir="ltr">Skip to the content</span></a>
+<div class="band" aria-hidden="true"></div>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="brand" href="../"><svg width="30" height="30" viewBox="-15 -15 30 30" aria-hidden="true"><rect x="-9" y="-9" width="18" height="18" fill="#16684e"/><rect x="-9" y="-9" width="18" height="18" fill="#16684e" transform="rotate(45)"/><circle r="4" fill="#e2bd55"/></svg><span data-l="ar" lang="ar" dir="rtl">ديوان الوثائق</span><span data-l="en" lang="en" dir="ltr">Dīwān al-Wathāʾiq</span></a>
+    <nav class="nav" aria-label="Sections"><a href="../"><span data-l="ar" lang="ar" dir="rtl">الرئيسية</span><span data-l="en" lang="en" dir="ltr">Welcome</span></a><a href="../how/"><span data-l="ar" lang="ar" dir="rtl">كيف يعمل</span><span data-l="en" lang="en" dir="ltr">How it works</span></a><a href="../demo/" aria-current="page"><span data-l="ar" lang="ar" dir="rtl">جرّب</span><span data-l="en" lang="en" dir="ltr">Try it</span></a><a href="../pitch/"><span data-l="ar" lang="ar" dir="rtl">العرض</span><span data-l="en" lang="en" dir="ltr">Pitch</span></a><a href="../archive/"><span data-l="ar" lang="ar" dir="rtl">الأرشيف</span><span data-l="en" lang="en" dir="ltr">The archive</span></a><a href="../creators/"><span data-l="ar" lang="ar" dir="rtl">من نحن</span><span data-l="en" lang="en" dir="ltr">The creators</span></a></nav>
+    <button class="lang-btn" type="button" data-lang-switch lang="en">English</button>
+  </div>
+</header>
+<main id="main">
+
+<section class="section">
+  <div class="wrap">
+    <h1 data-l="ar" lang="ar" dir="rtl">جرّب: كن أنت الخبير</h1><h1 data-l="en" lang="en" dir="ltr">Try it: be the expert</h1>
+    <p data-l="ar" lang="ar" dir="rtl" class="lead">هذه بيانات حقيقية مسجّلة من التجربة الأولية، تعمل في المتصفح دون اتصال. اختر صفحة، وشاهد القارئ الآلي يكتب، والمدقق يعلّم الأسطر المشكوك فيها، ثم قرّر أنت.</p><p data-l="en" lang="en" dir="ltr" class="lead">These are real recordings from the pilot, running in your browser with no connection. Pick a page, watch the AI reader write and the AI checker flag doubtful lines, then decide.</p>
+    <div class="demo-pick" id="pick" role="group" aria-label="Pages"></div>
+
+    <div class="workbench" id="bench" hidden>
+      <div class="scan-frame">
+        <div class="scan" id="scan">
+          <img id="scanImg" alt="" onload="this.parentNode.classList.add('has-img')">
+          <div class="scan-hl" id="hl" style="top:8%"></div>
+          <span data-l="ar" lang="ar" dir="rtl" class="ph">[ صورة الصفحة: تُضاف لاحقًا ]</span><span data-l="en" lang="en" dir="ltr" class="ph">[ Page scan: to be added ]</span>
+        </div>
+        <p class="scan-cap" id="scanCap"></p>
+      </div>
+      <div>
+        <div class="bench-top">
+          <div id="pageTitle" style="font-weight:600"></div>
+          <div class="meter" id="meter" hidden>
+            <span data-l="ar" lang="ar" dir="rtl" class="small muted">ثقة المدقق</span><span data-l="en" lang="en" dir="ltr" class="small muted">Checker confidence</span>
+            <div class="meter-bar"><span id="meterBar"></span></div>
+            <b id="meterVal"></b>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn btn-quiet" type="button" id="skip"><span data-l="ar" lang="ar" dir="rtl">أظهر النص كاملًا</span><span data-l="en" lang="en" dir="ltr">Show the whole text</span></button>
+          <span class="status" id="status" aria-live="polite"></span>
+        </div>
+        <ol class="lines" id="lines"></ol>
+        <div class="decide" id="decide" hidden>
+          <h2 data-l="ar" lang="ar" dir="rtl">قرارك</h2><h2 data-l="en" lang="en" dir="ltr">Your decision</h2>
+          <p data-l="ar" lang="ar" dir="rtl" class="muted small">صحّح أي سطر بالنقر على «صحّح»، أو اقبل اقتراح المدقق، ثم اعتمد الصفحة أو أعدها مع ملاحظة.</p><p data-l="en" lang="en" dir="ltr" class="muted small">Correct any line with “Edit”, or accept the checker’s suggestion, then approve the page or send it back with a note.</p>
+          <div class="row">
+            <button class="btn btn-primary" type="button" id="approve"><span data-l="ar" lang="ar" dir="rtl">اعتمد الصفحة</span><span data-l="en" lang="en" dir="ltr">Approve the page</span></button>
+            <button class="btn btn-terra" type="button" id="sendback"><span data-l="ar" lang="ar" dir="rtl">أعدها مع ملاحظة</span><span data-l="en" lang="en" dir="ltr">Send back with a note</span></button>
+          </div>
+          <div id="noteBox" hidden>
+            <label for="note" class="small"><span data-l="ar" lang="ar" dir="rtl">ملاحظتك للقارئ الآلي</span><span data-l="en" lang="en" dir="ltr">Your note for the AI reader</span></label>
+            <textarea id="note" dir="auto"></textarea>
+            <div class="row" style="margin-top:8px"><button class="btn btn-terra" type="button" id="sendNote"><span data-l="ar" lang="ar" dir="rtl">أرسل الملاحظة</span><span data-l="en" lang="en" dir="ltr">Send the note</span></button></div>
+          </div>
+        </div>
+        <div class="final" id="final" hidden tabindex="-1">
+          <div class="counter" id="counter"></div>
+          <p id="finalMsg" style="margin:6px 0 0;color:var(--on-night-2)"></p>
+          <ol id="finalLines"></ol>
+          <details class="compare" id="compare" hidden>
+            <summary><span data-l="ar" lang="ar" dir="rtl">قارن بما اعتمده خبيرنا في التجربة</span><span data-l="en" lang="en" dir="ltr">Compare with what our expert approved in the pilot</span></summary>
+            <ol id="expertLines"></ol>
+          </details>
+          <div class="row" style="margin-top:14px"><button class="btn btn-line" type="button" id="again"><span data-l="ar" lang="ar" dir="rtl">جرّب صفحة أخرى</span><span data-l="en" lang="en" dir="ltr">Try another page</span></button></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="live card" aria-labelledby="liveTitle">
+      <h2 id="liveTitle" style="font-size:22px"><span data-l="ar" lang="ar" dir="rtl">الوضع المباشر (اختياري)</span><span data-l="en" lang="en" dir="ltr">Live mode (optional)</span></h2>
+      <p data-l="ar" lang="ar" dir="rtl" class="muted small">يعرض حالة الصفحات الآن في سير العمل على n8n. يحتاج إلى رمز الدخول وإلى اتصال، ولذلك هو مطفأ افتراضيًا.</p><p data-l="en" lang="en" dir="ltr" class="muted small">Shows where pages stand right now in the n8n workflow. It needs the access code and a connection, so it is off by default.</p>
+      <label class="switch"><input type="checkbox" id="liveOn"> <span data-l="ar" lang="ar" dir="rtl">شغّل الوضع المباشر</span><span data-l="en" lang="en" dir="ltr">Turn on live mode</span></label>
+      <div id="liveBox" hidden style="margin-top:12px">
+        <label for="liveCode"><span data-l="ar" lang="ar" dir="rtl">رمز الدخول</span><span data-l="en" lang="en" dir="ltr">Access code</span></label>
+        <div class="row"><input type="password" id="liveCode" autocomplete="off"><button class="btn btn-quiet" type="button" id="liveGo"><span data-l="ar" lang="ar" dir="rtl">اعرض</span><span data-l="en" lang="en" dir="ltr">Show</span></button></div>
+        <div class="live-out" id="liveOut" aria-live="polite"></div>
+      </div>
+    </section>
+  </div>
+</section>
+</main>
+<footer class="site-foot">
+  <div class="dado" aria-hidden="true"></div>
+  <div class="wrap foot-sign">
+    <p style="margin:0"><span data-l="ar" lang="ar" dir="rtl">شهد على هذا الديوان شاهداه</span><span data-l="en" lang="en" dir="ltr">Witnessed by its two creators</span></p>
+    <div class="signatures"><a class="sig" href="../creators/#seal-1"><svg width="40" height="40" viewBox="-66 -66 132 132" aria-hidden="true"><circle r="62" fill="none" stroke="#e2bd55" stroke-width="2.6"/><circle r="54" fill="#e2bd55" fill-opacity="0.07" stroke="#e2bd55" stroke-width="1"/><text x="0" y="6" text-anchor="middle" font-family="Amiri, serif" font-size="21" font-weight="700" fill="#e2bd55">حسام</text></svg><span class="name"><span data-l="ar" lang="ar" dir="rtl">حسام الدين شقرون</span><span data-l="en" lang="en" dir="ltr">Houssam Eddine Chagroune</span></span></a><a class="sig" href="../creators/#seal-2"><svg width="40" height="40" viewBox="-66 -66 132 132" aria-hidden="true"><circle r="62" fill="none" stroke="#e2bd55" stroke-width="2.6"/><circle r="54" fill="#e2bd55" fill-opacity="0.07" stroke="#e2bd55" stroke-width="1"/><text x="0" y="6" text-anchor="middle" font-family="Amiri, serif" font-size="21" font-weight="700" fill="#e2bd55">ياسين</text></svg><span class="name"><span data-l="ar" lang="ar" dir="rtl">ياسين دادي عدون</span><span data-l="en" lang="en" dir="ltr">Yacine Daddi Addoun</span></span></a></div>
+  </div>
+  <div class="wrap foot-meta">
+    <div>
+      <p style="margin:0 0 4px"><span data-l="ar" lang="ar" dir="rtl">الصور: الأرشيف الوطني لما وراء البحار (ANOM)، إكس أون بروفانس. النصوص المعتمدة نسخ حرفي راجعه خبير.</span><span data-l="en" lang="en" dir="ltr">Scans: Archives nationales d’outre-mer (ANOM), Aix-en-Provence. Approved texts are diplomatic transcriptions checked by an expert.</span></p>
+      <p style="margin:0"><span data-l="ar" lang="ar" dir="rtl">مشروع التخرج لدورة Limitless Learning في الذكاء الاصطناعي الوكيلي.</span><span data-l="en" lang="en" dir="ltr">Final project for the Limitless Learning Agentic AI course.</span></p>
+    </div>
+    <div class="row" style="gap:16px">
+      <a href="https://github.com/hchagroune/diwan-htr">GitHub</a>
+      <a href="mailto:chagroune.amc@gmail.com">chagroune.amc@gmail.com</a>
+      <a class="board" href="../board.html"><span data-l="ar" lang="ar" dir="rtl">لوحة الفريق</span><span data-l="en" lang="en" dir="ltr">Team board</span></a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
