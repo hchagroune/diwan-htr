@@ -70,7 +70,7 @@ Google Drive: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REFRESH_TOKEN`
 ```
 server/main.py        FastAPI app: REST API (/api/...), background worker, password login, /healthz
 static/               the app's own UI (index.html, app.js, style.css), Arabic with an English switch
-htr/                  pipeline: engines/ (vendor engine, openai_compat, mock), agents/verifier.py (rule checks +
+htr/                  pipeline: engines/ (the vendor engine, a generic compatible-API engine, a mock engine), agents/verifier.py (rule checks +
                       self-consistency + model critic → confidence and flags), retriever.py (few-shot examples),
                       storage/ (gdrive, local), dataset.py, metrics.py, preprocess.py, textnorm.py, jobs.py
 tests/test_server.py  API tests (run by GitHub Actions on push/PR to main)
