@@ -44,6 +44,13 @@ Keys go only into Render's settings boxes, never into a chat or a file.
 
 From then on, every merge into `main` redeploys the site by itself, after the GitHub tests pass.
 
+### The presentation site
+
+The same Blueprint also publishes the public presentation site (welcome page, demo and pitch) as a free Render
+**static site** named `diwan-alwathaiq`, at `https://diwan-alwathaiq.onrender.com`. It serves the files in `docs/`
+on the `website` branch: no keys, no server, and it never sleeps, so it loads instantly during a pitch.
+Every merge into `website` republishes it within a minute. The pitch is at `/pitch/` and the demo at `/demo/`.
+
 > **The free plan sleeps.** After 15 minutes without visits the service stops, and the next visit takes about a
 > minute to wake it. Its disk is wiped each time, so in *upload mode* (no Drive) files are lost. Download your
 > approved texts, or connect Google Drive below so that everything lives in your Drive.
