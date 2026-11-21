@@ -18,6 +18,9 @@
       [].forEach.call(s.querySelectorAll("a,button"), function (b) { b.tabIndex = on ? 0 : -1; });
     });
     $("count").textContent = (cur + 1) + " / " + n;
+    [].forEach.call(document.querySelectorAll("#progress li"), function (li, k) {
+      li.className = k < cur ? "done" : (k === cur ? "now" : "");
+    });
     if (history.replaceState) history.replaceState(null, "", "#" + (cur + 1));
   }
   function next() { go(cur + 1); }

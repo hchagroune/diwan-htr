@@ -481,7 +481,9 @@ if __name__ == "__main__":
     welcome(); how(); demo(); archive(); creators(); not_found()
     import pitch_page
     import qr
-    (DOCS / "assets" / "qr-demo.svg").write_text(qr.to_svg(qr.build(SITE_URL + "demo/"), SITE_URL + "demo/"), encoding="utf-8")
+    # the QR opens the demo straight into a real attempt on page 0188
+    target = SITE_URL + "demo/?page=0188"
+    (DOCS / "assets" / "qr-demo.svg").write_text(qr.to_svg(qr.build(target), target), encoding="utf-8")
     pitch_page.build(DOCS, page, t, seal, CREATORS, SITE_URL)
     import service_worker
     service_worker.build(DOCS)
