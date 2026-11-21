@@ -4,7 +4,7 @@
 
 @font-face { font-family: "Amiri"; src: url("fonts/amiri-400.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Amiri"; src: url("fonts/amiri-700.woff") format("woff"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Reem Kufi"; src: url("fonts/reemkufi-var.woff") format("woff"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "Amiri"; src: url("fonts/amiri-400i.woff") format("woff"); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: "IBM Plex Sans Arabic"; src: url("fonts/plexarabic-400.woff") format("woff"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "IBM Plex Sans Arabic"; src: url("fonts/plexarabic-500.woff") format("woff"); font-weight: 500; font-display: swap; }
 @font-face { font-family: "IBM Plex Sans Arabic"; src: url("fonts/plexarabic-600.woff") format("woff"); font-weight: 600 700; font-display: swap; }
@@ -21,7 +21,7 @@
   --brass: #e2bd55;
   --f-ui: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --f-ui-ar: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
-  --f-kufi: "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
+  --f-head: "Amiri", "Noto Naskh Arabic", serif;
   --f-deed: "Amiri", "Noto Naskh Arabic", serif;
   --wrap: 1120px;
   --zellige: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Crect width='28' height='22' fill='%2318233a'/%3E%3Cg transform='translate(14 11)'%3E%3Crect x='-6' y='-6' width='12' height='12' fill='%2316684e'/%3E%3Crect x='-6' y='-6' width='12' height='12' fill='%2316684e' transform='rotate(45)'/%3E%3Ccircle r='2.6' fill='%23e2bd55'/%3E%3C/g%3E%3C/svg%3E");
@@ -34,8 +34,11 @@ html[data-ui="ar"] [data-l="en"], html[data-ui="en"] [data-l="ar"] { display: no
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--wash); color: var(--ink); font-family: var(--f-ui); font-size: 18px; line-height: 1.6; }
-html[lang="ar"] body { font-family: var(--f-ui-ar); line-height: 1.8; }
+body { margin: 0; background: var(--wash); color: var(--ink); font-family: var(--f-deed); font-size: 20px; line-height: 1.65; }
+html[lang="ar"] body { font-size: 21px; line-height: 1.9; }
+/* interface chrome stays in a plain sans so small labels and controls read crisply */
+.nav, .btn, .chip, .lang-btn, .skip, label, input, textarea, button, table, .small, .status, .est, .src, .fact .src, .meter, .ln, .scan-cap, .scan .ph, .crop .ph, .foot-meta, .deck-bar { font-family: var(--f-ui); }
+html[lang="ar"] .nav, html[lang="ar"] .btn, html[lang="ar"] .chip, html[lang="ar"] label, html[lang="ar"] .small, html[lang="ar"] .status, html[lang="ar"] .foot-meta, html[lang="ar"] .scan-cap { font-family: var(--f-ui-ar); }
 img, svg { max-width: 100%; }
 a { color: var(--cobalt); text-underline-offset: 3px; }
 a:hover { color: var(--cobalt-dark); }
@@ -46,7 +49,7 @@ a:hover { color: var(--cobalt-dark); }
 .skip:focus { top: 12px; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .deed { font-family: var(--f-deed); }
-.kufi { font-family: var(--f-kufi); }
+.kufi { font-family: var(--f-head); }
 .muted { color: var(--ink-2); }
 .small { font-size: 15px; }
 
@@ -57,7 +60,7 @@ a:hover { color: var(--cobalt-dark); }
 /* ---------- header ---------- */
 .site-head { background: var(--night); color: var(--on-night); }
 .head-row { display: flex; align-items: center; gap: 20px; min-height: 68px; flex-wrap: wrap; padding-block: 8px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--brass); text-decoration: none; font-family: var(--f-kufi); font-weight: 600; font-size: 24px; margin-inline-end: 8px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--brass); text-decoration: none; font-family: var(--f-head); font-weight: 600; font-size: 24px; margin-inline-end: 8px; }
 .brand:hover { color: var(--brass); }
 .brand svg { flex: none; }
 .nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1 1 auto; }
@@ -80,7 +83,8 @@ main { display: block; }
 .on-night { background: var(--night); color: var(--on-night); }
 .on-night a:not(.btn) { color: #9cc0f2; }
 h1, h2, h3 { line-height: 1.3; margin: 0 0 12px; font-weight: 600; }
-html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3 { font-family: var(--f-kufi); line-height: 1.45; }
+h1, h2, h3 { font-family: var(--f-head); font-weight: 700; }
+html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3 { line-height: 1.5; }
 h1 { font-size: clamp(32px, 4.6vw, 52px); }
 h2 { font-size: clamp(26px, 3.2vw, 36px); }
 h3 { font-size: 22px; }
@@ -122,7 +126,7 @@ html[dir="ltr"] .motto-ink { animation-name: ink; }
 .motto-en { margin: 0; font-size: clamp(16px, 2vw, 22px); color: var(--on-night); }
 .motto-src { margin: 0; font-size: 14px; color: var(--on-night-2); max-width: 46ch; }
 .side { display: flex; flex-direction: column; gap: 10px; }
-.side .label { font-family: var(--f-kufi); color: var(--brass); font-size: 20px; font-weight: 600; }
+.side .label { font-family: var(--f-head); color: var(--brass); font-size: 20px; font-weight: 600; }
 .side p { color: #e8e4da; font-size: 17px; margin: 0; }
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; }
@@ -187,7 +191,7 @@ html[lang="ar"] .steps li::before { content: counter(step, arabic-indic); }
 .decide textarea { width: 100%; min-height: 84px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 16px; }
 .status { min-height: 1.6em; font-size: 15px; color: var(--ink-2); }
 .final { margin-top: 18px; background: var(--night); color: var(--on-night); border-radius: 16px; padding: 22px; }
-.final .counter { font-family: var(--f-kufi); font-size: 28px; color: var(--brass); }
+.final .counter { font-family: var(--f-head); font-size: 28px; color: var(--brass); }
 .final ol { margin: 12px 0 0; padding-inline-start: 1.6em; font-family: var(--f-deed); font-size: 20px; line-height: 1.9; direction: rtl; text-align: right; }
 .final li.trained::marker { color: var(--brass); }
 .compare { margin-top: 14px; font-size: 15px; color: var(--on-night-2); }
@@ -205,7 +209,7 @@ html[lang="ar"] .steps li::before { content: counter(step, arabic-indic); }
 /* ---------- archive ---------- */
 .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
 .fact { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
-.fact .num { font-family: var(--f-kufi); font-size: 34px; color: var(--green); line-height: 1.2; }
+.fact .num { font-family: var(--f-head); font-size: 34px; color: var(--green); line-height: 1.2; }
 .fact .src { font-size: 13px; color: var(--ink-2); margin-top: 6px; }
 .letters { display: flex; gap: 18px; flex-wrap: wrap; }
 .letter { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; }
@@ -252,3 +256,43 @@ dialog.story::backdrop { background: rgba(17, 26, 45, .6); }
 
 /* demo opened inside the pitch */
 html.embed .band, html.embed .site-head, html.embed .site-foot, html.embed .skip, html.embed .live { display: none; }
+
+/* ---------- diagrams of the real n8n workflow (tools/workflow_diagrams.py) ---------- */
+.wf { width: 100%; height: auto; display: block; margin-inline: auto; font-family: var(--f-ui); }
+.wf .box { fill: #1c2843; stroke: #3a4868; stroke-width: 1.5; }
+.wf .ic { color: #c3c8d4; }
+.wf .nd.ai .box { stroke: var(--brass); stroke-width: 2.2; }
+.wf .nd.ai .ic { color: var(--brass); }
+.wf .nd.human .box { fill: var(--green); stroke: var(--green); }
+.wf .nd.human .ic { color: #fff; }
+.wf .nd.board .box { stroke-dasharray: 5 4; fill: #18233a; }
+.wf .nd.board .ic { color: #8fa3c9; }
+.wf .nd.faded > * { opacity: .55; }
+.wf .nd-lbl { fill: #e8e4da; font-size: 14px; }
+.wf .ed { fill: none; stroke: #7a86a3; stroke-width: 2; }
+.wf .ed.branch { stroke: #9aa8c6; }
+.wf .ed.faint { stroke: #3a4868; stroke-dasharray: 3 5; }
+.wf .ed.loop { stroke: #f0b48f; stroke-dasharray: 7 6; stroke-width: 2.2; }
+.wf .ed-head.loop { fill: none; stroke: #f0b48f; stroke-width: 2.2; }
+.wf .ed-dot { fill: #7a86a3; }
+.wf .ed-lbl { fill: #9aa1b2; font-size: 13px; }
+.wf .ed-lbl.loop { fill: #f0b48f; font-size: 14px; }
+.wf .stub rect { fill: none; stroke: #4a5878; stroke-dasharray: 4 4; }
+.wf .stub text { fill: #c3c8d4; font-size: 13px; }
+.wf-over .blk .box { fill: #1c2843; stroke: #3a4868; }
+.wf-over .blk.ai .box { stroke: var(--brass); stroke-width: 2.2; }
+.wf-over .blk.human .box { fill: #15503d; stroke: var(--green); }
+.wf-over .b-num { fill: var(--brass); font-family: var(--f-head); font-size: 30px; font-weight: 700; }
+.wf-over .b-ar { fill: #f3ede1; font-family: var(--f-head); font-size: 25px; font-weight: 700; }
+.wf-over .b-en { fill: #c3c8d4; font-size: 14px; }
+.wf-over .b-k { fill: #9aa1b2; font-size: 12.5px; }
+.wf-panel { background: var(--night); border-radius: 14px; padding: 18px 14px; overflow-x: auto; }
+.wf-panel .wf { min-width: 760px; }
+.wf-stage { display: grid; gap: 14px; margin-top: 30px; }
+.wf-stage h3 { margin: 0; }
+
+/* creators' portraits: the photo sits inside the seal's ring once it is uploaded */
+.portrait { position: relative; display: inline-block; flex: none; }
+.portrait > svg { width: 100%; height: 100%; display: block; }
+.portrait > img { position: absolute; inset: 15%; width: 70%; height: 70%; border-radius: 50%; object-fit: cover; display: none; }
+.portrait.has-img > img { display: block; }

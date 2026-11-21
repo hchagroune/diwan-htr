@@ -8,7 +8,8 @@ and "AI checker / المدقق الآلي".
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
-SITE_URL = "https://hchagroune.github.io/diwan-htr/"
+# Public address of the static site (Render static site "diwan-alwathaiq"). The pitch QR code points here.
+SITE_URL = "https://diwan-alwathaiq.onrender.com/"
 
 # Names as they appear on the seals and signatures. Arabic spelling to be confirmed by the creators.
 CREATORS = [
@@ -17,6 +18,20 @@ CREATORS = [
     {"id": "seal-2", "ar": "ياسين دادي عدون", "en": "Yacine Daddi Addoun",
      "role_ar": "الشريك المؤسس، ليمتلس إيماجينيشن", "role_en": "Co-founder, Limitless imagination"},
 ]
+CREATORS[0]["photo"], CREATORS[1]["photo"] = "houssam", "yacine"
+
+
+def img_slot(base, alt="", extra=""):
+    """An <img> that tries base.jpg, then .png, .webp, .jpeg. Until one exists, the placeholder next to it shows."""
+    return (f'<img src="{base}.jpg" data-alt="{base}.png,{base}.webp,{base}.jpeg" alt="{alt}" {extra}'
+            f'onerror="diwanImg(this)" onload="this.parentNode.classList.add(\'has-img\')">')
+
+
+def portrait(c, size, root, color="#b4532a", label=True):
+    """The creator's round seal; once assets/img/<photo>.jpg is uploaded, the photo shows inside the ring."""
+    return (f'<span class="portrait" style="width:{size}px;height:{size}px">'
+            f'{seal(size, c["ar"].split()[0], color=color, label=c["en"] if label else "")}'
+            f'{img_slot(root + "assets/img/" + c["photo"], c["en"] if label else "")}</span>')
 
 
 def t(ar, en, tag="span", cls="", attrs=""):
@@ -51,7 +66,9 @@ NAV = [
     ("creators/", "من نحن", "The creators"),
 ]
 
-HEAD_SCRIPT = ("<script>(function(){try{var m=/[?&]lang=(ar|en)\\b/.exec(location.search);"
+HEAD_SCRIPT = ("<script>window.diwanImg=function(i){var l=(i.getAttribute('data-alt')||'').split(',');"
+               "var n=l.shift();i.setAttribute('data-alt',l.join(','));if(n)i.src=n;else i.onerror=null;};"
+               "(function(){try{var m=/[?&]lang=(ar|en)\\b/.exec(location.search);"
                "var l=m?m[1]:(localStorage.getItem('diwan-lang')||'ar');var h=document.documentElement;"
                "h.lang=l;h.dir=l==='ar'?'rtl':'ltr';h.setAttribute('data-ui',l);}catch(e){}})();</script>")
 
@@ -63,7 +80,7 @@ def page(path, title_ar, title_en, desc, body, scripts=(), current=None, bare=Fa
         f'<a href="{root}{href}"{" aria-current=\"page\"" if href == current else ""}>{t(ar, en)}</a>'
         for href, ar, en in NAV)
     sigs = "".join(
-        f'<a class="sig" href="{root}creators/#{c["id"]}">{seal(40, c["ar"].split()[0], color="#e2bd55")}'
+        f'<a class="sig" href="{root}creators/#{c["id"]}">{portrait(c, 44, root, color="#e2bd55", label=False)}'
         f'<span class="name">{t(c["ar"], c["en"])}</span></a>' for c in CREATORS)
     header = f"""<a class="skip" href="#main">{t("تخطَّ إلى المحتوى", "Skip to the content")}</a>
 <div class="band" aria-hidden="true"></div>
@@ -145,7 +162,7 @@ def welcome():
       {ARCH_SVG}
       <div class="arch-inner">
         <div class="crop">
-          <img src="assets/img/motto-line9.jpg" alt="" onload="this.parentNode.classList.add('has-img')">
+          {img_slot("assets/img/motto-line9")}
           {t("[ مقتطع السطر ٩ من الوثيقة ٠١٨٨ بخط الكاتب ]", "[ Line 9 of deed 0188 in the scribe’s hand ]", cls="ph")}
         </div>
         <h1 id="motto" class="motto" lang="ar" dir="rtl"><span class="motto-ink">الجزائر المحمية بالله</span></h1>
@@ -222,6 +239,11 @@ def how():
         ("كل صفحة معتمدة تعلّم التالية", "Every approved page teaches the next", "الصورة ونصها المعتمد يصيران زوجًا موثقًا للتدريب.", "The scan and its approved text become a verified training pair."),
     ]
     rl = "".join(f'<div class="card">{t(a, b, tag="h3")}{t(c, d, tag="p", cls="muted")}</div>' for a, b, c, d in rules)
+    import workflow_diagrams as wd
+    AR_N = "٠١٢٣٤٥"
+    wf_stages = "".join(
+        f'<article class="wf-stage">{t(AR_N[st["n"]] + " · " + st["ar"], str(st["n"]) + " · " + st["title_en"], tag="h3")}'
+        f'<div class="wf-panel">{st["svg"]()}</div>{t(st["long_ar"], st["long_en"], tag="p")}</article>' for st in wd.STAGES)
     body = f"""
 <section class="section">
   <div class="wrap">
@@ -233,6 +255,16 @@ def how():
       <div>{t("<b>الإعادة مع ملاحظة.</b> إذا رأى الخبير خطأ، كتب ملاحظة فيقرأ القارئ الآلي الصفحة من جديد مسترشدًا بها، ثم تعود إليه. في التجربة الأولية أُعيدت الصفحة ٠١٨٨ مرتين قبل اعتمادها.",
               "<b>Send back with a note.</b> When the expert sees a mistake, they write a note; the AI reader reads the page again, guided by it, and the page returns for review. In the pilot, page 0188 went back twice before it was approved.", tag="p")}</div>
     </div>
+  </div>
+</section>
+<section class="section" aria-labelledby="wf-title">
+  <div class="wrap">
+    <h2 id="wf-title">{t("سير العمل الحقيقي في n8n", "The real workflow in n8n")}</h2>
+    {t("هذه هي الخطوات الأربعون كما تظهر في n8n، مرسومة مرحلةً مرحلة. الأسهم البرتقالية المتقطعة هي الحلقتان: قراءة ثانية بطلب المدقق، وإعادة الصفحة بملاحظة الخبير.",
+       "These are the 40 steps as they appear in n8n, drawn stage by stage. The dashed orange arrows are the two loops: a second reading when the checker asks, and a page sent back with the expert’s note.", tag="p", cls="lead")}
+    <div class="wf-panel">{wd.overview()}</div>
+    {wf_stages}
+    <p class="small muted" style="margin-top:18px">{t("رُسمت المخططات من سير العمل نفسه، ويُعرض فيها كل نموذج آلي باسم دوره فقط.", "The diagrams are drawn from the workflow itself; each AI model is shown only by its role.")}</p>
   </div>
 </section>
 <div class="dado" aria-hidden="true"></div>
@@ -398,7 +430,7 @@ def creators():
     c1, c2 = CREATORS
     seals = "".join(
         f'<button class="seal-btn" type="button" id="{c["id"]}" data-story="story-{c["id"]}" aria-haspopup="dialog">'
-        f'{seal(150, c["ar"].split()[0] + " " + c["ar"].split()[1] if len(c["ar"].split()) > 2 else c["ar"], "١٤٤٨", label=c["en"])}'
+        f'{portrait(c, 150, "../")}'
         f'<span class="who">{t(c["ar"], c["en"])}</span><span class="role">{t(c["role_ar"], c["role_en"])}</span>'
         f'<span class="small" style="color:var(--cobalt)">{t("انقر لقراءة قصته", "Open the story")}</span></button>'
         for c in CREATORS)
@@ -409,7 +441,7 @@ def creators():
             extra = t("في التجربة الأولية راجع الصفحتين ٠٠٣٨ و٠١٨٨ واعتمدهما.", "In the pilot he reviewed and approved pages 0038 and 0188.", tag="p")
         dialogs += f"""<dialog class="story" id="story-{c["id"]}" aria-labelledby="story-{c["id"]}-t">
   <div class="story-in">
-    {seal(72, c["ar"].split()[0], label=c["en"])}
+    {portrait(c, 120, "../")}
     <h2 id="story-{c["id"]}-t" style="margin:0">{t(c["ar"], c["en"])}</h2>
     {t(c["role_ar"], c["role_en"], tag="p", cls="muted")}
     {extra}
@@ -463,24 +495,27 @@ def not_found():
   <div class="wrap">
     {t("هذه الصفحة غير موجودة", "This page does not exist", tag="h1")}
     {t("ربما تغيّر العنوان. عد إلى الصفحة الرئيسية أو جرّب العرض.", "The address may have changed. Go back to the welcome page or try the demo.", tag="p", cls="lead")}
-    <div class="row"><a class="btn btn-primary" href="/diwan-htr/">{t("الرئيسية", "Welcome")}</a><a class="btn btn-quiet" href="/diwan-htr/demo/">{t("جرّب", "Try it")}</a></div>
+    <div class="row"><a class="btn btn-primary" href="./">{t("الرئيسية", "Welcome")}</a><a class="btn btn-quiet" href="demo/">{t("جرّب", "Try it")}</a></div>
   </div>
 </section>"""
     p = page("404.html", "غير موجودة · ديوان الوثائق", "Not found · Dīwān al-Wathāʾiq", "Page not found.", body)
-    # 404 is served from any depth: use absolute paths
-    s = p.read_text(encoding="utf-8").replace('href="assets/', 'href="/diwan-htr/assets/').replace('src="assets/', 'src="/diwan-htr/assets/')
-    s = s.replace('data-root=""', 'data-root="/diwan-htr/"')
-    for href, _, _ in NAV:
-        if href: s = s.replace(f'href="{href}"', f'href="/diwan-htr/{href}"')
-    s = s.replace('href="creators/#', 'href="/diwan-htr/creators/#').replace('href="board.html"', 'href="/diwan-htr/board.html"')
-    s = s.replace('href=""', 'href="/diwan-htr/"')
+    # 404 is served at any depth and under two bases (GitHub Pages /diwan-htr/, Render /):
+    # a <base> chosen before anything loads makes every relative link resolve from the site root.
+    base = ("<script>document.write('<base href=\"' + (location.pathname.indexOf('/diwan-htr/') === 0 ? '/diwan-htr/' : '/') + '\">');</script>")
+    s = p.read_text(encoding="utf-8").replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + base, 1)
+    s = s.replace('<a class="skip" href="#main">', '<a class="skip" href="#main" onclick="var m=document.getElementById(\'main\');m.tabIndex=-1;m.focus();return false">')
+    s = s.replace('href="/diwan-htr/demo/"', 'href="demo/"').replace('href="/diwan-htr/"', 'href="./"').replace('href=""', 'href="./"')
     p.write_text(s, encoding="utf-8")
 
 
 if __name__ == "__main__":
     welcome(); how(); demo(); archive(); creators(); not_found()
     import pitch_page
-    pitch_page.build(DOCS, page, t, seal, CREATORS)
+    import qr
+    # the QR opens the demo straight into a real attempt on page 0188
+    target = SITE_URL + "demo/?page=0188"
+    (DOCS / "assets" / "qr-demo.svg").write_text(qr.to_svg(qr.build(target), target), encoding="utf-8")
+    pitch_page.build(DOCS, page, t, seal, CREATORS, SITE_URL, portrait, img_slot)
     import service_worker
     service_worker.build(DOCS)
     print("site built in", DOCS)
