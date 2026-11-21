@@ -256,3 +256,37 @@ dialog.story::backdrop { background: rgba(17, 26, 45, .6); }
 
 /* demo opened inside the pitch */
 html.embed .band, html.embed .site-head, html.embed .site-foot, html.embed .skip, html.embed .live { display: none; }
+
+/* ---------- diagrams of the real n8n workflow (tools/workflow_diagrams.py) ---------- */
+.wf { width: 100%; height: auto; display: block; margin-inline: auto; font-family: var(--f-ui); }
+.wf .box { fill: #1c2843; stroke: #3a4868; stroke-width: 1.5; }
+.wf .ic { color: #c3c8d4; }
+.wf .nd.ai .box { stroke: var(--brass); stroke-width: 2.2; }
+.wf .nd.ai .ic { color: var(--brass); }
+.wf .nd.human .box { fill: var(--green); stroke: var(--green); }
+.wf .nd.human .ic { color: #fff; }
+.wf .nd.board .box { stroke-dasharray: 5 4; fill: #18233a; }
+.wf .nd.board .ic { color: #8fa3c9; }
+.wf .nd.faded > * { opacity: .55; }
+.wf .nd-lbl { fill: #e8e4da; font-size: 14px; }
+.wf .ed { fill: none; stroke: #7a86a3; stroke-width: 2; }
+.wf .ed.branch { stroke: #9aa8c6; }
+.wf .ed.faint { stroke: #3a4868; stroke-dasharray: 3 5; }
+.wf .ed.loop { stroke: #f0b48f; stroke-dasharray: 7 6; stroke-width: 2.2; }
+.wf .ed-head.loop { fill: none; stroke: #f0b48f; stroke-width: 2.2; }
+.wf .ed-dot { fill: #7a86a3; }
+.wf .ed-lbl { fill: #9aa1b2; font-size: 13px; }
+.wf .ed-lbl.loop { fill: #f0b48f; font-size: 14px; }
+.wf .stub rect { fill: none; stroke: #4a5878; stroke-dasharray: 4 4; }
+.wf .stub text { fill: #c3c8d4; font-size: 13px; }
+.wf-over .blk .box { fill: #1c2843; stroke: #3a4868; }
+.wf-over .blk.ai .box { stroke: var(--brass); stroke-width: 2.2; }
+.wf-over .blk.human .box { fill: #15503d; stroke: var(--green); }
+.wf-over .b-num { fill: var(--brass); font-family: var(--f-head); font-size: 30px; font-weight: 700; }
+.wf-over .b-ar { fill: #f3ede1; font-family: var(--f-head); font-size: 25px; font-weight: 700; }
+.wf-over .b-en { fill: #c3c8d4; font-size: 14px; }
+.wf-over .b-k { fill: #9aa1b2; font-size: 12.5px; }
+.wf-panel { background: var(--night); border-radius: 14px; padding: 18px 14px; overflow-x: auto; }
+.wf-panel .wf { min-width: 760px; }
+.wf-stage { display: grid; gap: 14px; margin-top: 30px; }
+.wf-stage h3 { margin: 0; }
